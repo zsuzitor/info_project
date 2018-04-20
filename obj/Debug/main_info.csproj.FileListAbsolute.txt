@@ -1,0 +1,9 @@
+E:\csharp\main_info\main_info\bin\Debug\main_info.exe.config
+E:\csharp\main_info\main_info\bin\Debug\main_info.exe
+E:\csharp\main_info\main_info\bin\Debug\main_info.pdb
+E:\csharp\main_info\main_info\obj\Debug\main_info.csprojResolveAssemblyReference.cache
+E:\csharp\main_info\main_info\obj\Debug\main_info.Properties.Resources.resources
+E:\csharp\main_info\main_info\obj\Debug\main_info.csproj.GenerateResource.Cache
+E:\csharp\main_info\main_info\obj\Debug\main_info.exe
+E:\csharp\main_info\main_info\obj\Debug\main_info.pdb
+E:\csharp\main_info\main_info\obj\Debug\main_info.Article.resources
