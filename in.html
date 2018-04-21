@@ -39,7 +39,7 @@ body{
 }
 /*---------------------------------------------------------------------------------------*/
 div.main_div{
-
+position: relative;
 }
 
 div.main_top_div{
@@ -55,19 +55,26 @@ div.main_block_left{
 	width: 30%;
 	border: 1px solid black;
 	min-height: 500px;
+	overflow: hidden;
+	transition: 1s;
+	position: absolute;
 }
 div.main_block_right{
 	width: 68%;
 min-height: 500px;
 	border: 1px solid black;
+	overflow: hidden;
+	transition: 1s;
+	position: absolute;
 }
 div.div_for_block{
 	margin-top: 100px;
 	margin-left: 50px;
-	min-width: 600px;
+	position: relative;
+	/*min-width: 600px;*/
 }
 div.div_left_column{
-	width: 50px;
+	width: 55px;
 	height: 1000px;
 	position: fixed;
 	top: 100px;
@@ -76,20 +83,23 @@ div.div_left_column{
 }
 div.div_search{
 border: 1px solid black;
-width: 50px;
+width: 55px;
 height: 100%;
 transition: 1s;
 overflow: hidden;
 white-space: nowrap;
 }
-div.div_search:hover{
+/* div.div_search:hover{
 	width: 300px;
-}
+} */
 div.div_settings_block{
-width: 200px;
+width: 100px;
+top: 0;
 margin: auto;
 	border: 1px solid black;
 height: 100%;
+position: absolute;
+transition: 1s;
 }
 div.div_search_img{
 	width: 50px;
@@ -97,6 +107,7 @@ div.div_search_img{
 	 border-radius: 50%;
 	 border: 1px solid black;
 	 position: relative;
+	 cursor: pointer;
 }
 
 div.div_search_input_block{
@@ -108,10 +119,11 @@ div.div_search_input_block{
 }
 div.div_for_top_menu{
 	position: absolute;
-	width: 400px;
+	width: 100%;
 	height: 50px;
 	top: -60px;
-	left: 400px;
+	left: 100px;
+	transition: 1s;
 }
 div.div_settings_left_b{
 	height:0px;
@@ -140,6 +152,16 @@ div.div_settings_bottom_b{
     border-right: 20px solid transparent;
     border-left:20px solid transparent;
     border-top:40px solid black;
+    margin: auto;
+cursor: pointer;
+}
+div.div_settings_top_b{
+	height:0px;
+    width:0px;
+    border-right: 20px solid transparent;
+    border-left:20px solid transparent;
+    border-bottom:40px solid black;
+    margin: auto;
 cursor: pointer;
 }
 div.top_menu_button{
@@ -184,33 +206,136 @@ div.top_menu_dell_select:before{
 }
 	</style>
 	<script>
+
+//TODO
+/*
+<!--TODO-->
+<!--div_left_column высоту нормально задавать-->
+<!--main_top_div ширину нормально-->
+<!--для картинки можно попробовать из байтов ее строить-->
+<!---->
+
+<!--<button onclick="console.log('sdf')">11111111111111111111111</button>-->
+
+когда смещаю влево блок с кнопками смещать правее блок menu или вообще его на постоянку переместить правее и смотреть что бы его не перекрывала кнопка поиска
+слева в строке кнопку для подъема наверх
+колонку слева высоту ей задавать js
+линия в блоке сверху сделать что бы ей можно было менять рамеры divов
+слева человеческий список сделать
+реальзация поиска
+кнопка круглая будет именно кнопкой для поиска
+добавить тени и css
+*/
+
+
+
+
+		//console.log(client_width);
+		var client_width=0;
+		var client_heigth=0;
+		var x_centre=0;
 		
+		document.addEventListener("DOMContentLoaded", page_first_start);
+
+
+		function page_first_start(){
+			client_width=document.documentElement.clientWidth;
+			//alert(client_width);
+			client_heigth=document.documentElement.clientHeight;
+			var left_div=document.getElementById("main_block_left_id");
+			//var right_div=document.getElementById("main_block_right_id");
+			var left_line_div=document.getElementById("div_left_column_id");
+			var div_for_block=document.getElementById("div_for_block_id");
+			div_for_block.style.width=((client_width-left_line_div.offsetWidth)+'px');
+			x_centre=left_line_div.offsetWidth+left_div.offsetWidth;
+			var setting_div=document.getElementById("div_settings_block_id");
+			setting_div.style.left=x_centre-(setting_div.offsetWidth/2)+'px';//marginLeft
+			//left_div.style.width = (client_width-left_line_divoffsetWidth)*0.3 +'px;'
+			//right_div.style.width = (client_width-left_line_divoffsetWidth)*0.7 +'px;'
+
+			var right_div=document.getElementById("main_block_right_id");
+			right_div.style.left=left_div.offsetWidth+5+'px';
+		}
+		function show_top_menu(){
+var top_menu=document.getElementById("div_for_top_menu_id");
+var top_setings=document.getElementById("div_settings_block_id");
+top_menu.style.top="0";
+top_setings.style.top="70px";
+var ch=document.getElementById("div_settings_bottom_b_ex");
+ch.innerHTML="<div class='div_settings_top_b' onclick='hidden_top_menu()'></div>";
+		}
+		function hidden_top_menu(){
+var top_menu=document.getElementById("div_for_top_menu_id");
+var top_setings=document.getElementById("div_settings_block_id");
+top_menu.style.top="-70px";
+top_setings.style.top="0";
+var ch=document.getElementById("div_settings_bottom_b_ex");
+ch.innerHTML="<div class='div_settings_bottom_b' onclick='show_top_menu()'></div>";
+
+		}
+		function show_left_menu(){
+var left_div=document.getElementById("main_block_left_id");
+var setting_div=document.getElementById("div_settings_block_id");
+var right_div=document.getElementById("main_block_right_id");
+var left_line_div=document.getElementById("div_left_column_id");
+right_div.style.width = '';
+left_div.style.display = 'block';
+right_div.style.left =left_div.offsetWidth+5+'px';//left_line_div.offsetWidth
+var top_setings=document.getElementById("div_settings_block_id");
+top_setings.style.left=x_centre-(setting_div.offsetWidth/2)+'px';
+
+var search_div=document.getElementById("div_search_id");
+search_div.style.marginLeft = '0';
+		}
+		function hidden_left_menu(){
+var left_div=document.getElementById("main_block_left_id");
+
+var right_div=document.getElementById("main_block_right_id");
+var left_line_div=document.getElementById("div_left_column_id");
+right_div.style.width = (client_width-left_line_div.offsetWidth)+'px';
+right_div.style.left =0;//left_line_div.offsetWidth
+var top_setings=document.getElementById("div_settings_block_id");
+top_setings.style.left=left_line_div.offsetWidth-(top_setings.offsetWidth/2)+'px';
+left_div.style.display = 'none';
+var search_div=document.getElementById("div_search_id");
+search_div.style.marginLeft = '300px';
+		}
+function show_search_block(){
+	var div=document.getElementById("div_search_id");
+	div.style.width = '300px';
+	
+}
+function hidden_search_block(){
+var div=document.getElementById("div_search_id");
+	div.style.width = '55px';
+}
+
 	</script>
 </head><body>
 	
 	<div class="main_div">
 	<div class="main_top_div">
-		<div class="div_for_top_menu">
+		<div class="div_for_top_menu" id="div_for_top_menu_id">
 		<div class="div_inline_block top_menu_button top_menu_add_section"></div>
 		<div class="div_inline_block top_menu_button top_menu_add_article"></div>
 		<div class="div_inline_block top_menu_button top_menu_dell_select"></div>
 	</div>
-		<div class="div_inline_block div_search">
+		<div class="div_inline_block div_search" id="div_search_id" onmouseout='hidden_search_block()' onmouseover='show_search_block()'>
 			<div class="div_search_img div_inline_block"></div>
 			<div class="div_inline_block div_search_input_block"> <input type="text"></div>
 		</div>
-		<div class="div_inline_block div_settings_block">
+		<div class="div_inline_block div_settings_block" id="div_settings_block_id">
 			<div>
-				<div class="div_inline_block"><div class="div_settings_left_b"></div></div>
+				<div class="div_inline_block"><div class="div_settings_left_b" onclick="show_left_menu()"></div></div>
 				<div  class="div_inline_block"><div class="div_settings_centre_b"></div></div>
-				<div class="div_inline_block"><div class="div_settings_right_b"></div></div>
+				<div class="div_inline_block"><div class="div_settings_right_b" onclick="hidden_left_menu()"></div></div>
 			</div>
-			<div><div class="div_settings_bottom_b"></div></div>
+			<div id="div_settings_bottom_b_ex"><div class="div_settings_bottom_b" onclick="show_top_menu()"></div></div>
 		</div>
 	</div>
-	<div class="div_left_column"></div>
-	<div class="div_inline_block div_for_block"><div class="div_inline_block main_block_left"></div>
-<div class="div_inline_block  main_block_right"></div></div>
+	<div class="div_left_column" id="div_left_column_id"></div>
+	<div class="div_inline_block div_for_block" id="div_for_block_id"><div class="div_inline_block main_block_left" id="main_block_left_id"></div>
+<div class="div_inline_block  main_block_right" id="main_block_right_id"></div></div>
 </div>
 
 
@@ -222,10 +347,3 @@ div.top_menu_dell_select:before{
 
 </body></html>
 
-<!--TODO-->
-<!--div_left_column высоту нормально задавать-->
-<!--main_top_div ширину нормально-->
-<!--для картинки можно попробовать из байтов ее строить-->
-<!---->
-
-<!---->
