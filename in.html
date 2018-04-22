@@ -1,211 +1,238 @@
 <html><head>
 	<style type='text/css'>
-		input,
-select,
-textarea {
-    /*max-width: 280px;*/
-    width:100%;
-    height: 100%;
-   box-sizing: border-box;
-}
-.link_standart_for_div {
-    display: block; /* Ссылка как блочный элемент */
-    text-align: center; /* Выравнивание по центру */
-    height: 100%; /* Высота на весь слой */
-    color: black; /* Цвет ссылки */
-}
-img {
-    width: 100%;
-    height: 100%;
-}
+	input,
+	select,
+	textarea {
+		/*max-width: 280px;*/
+		width:100%;
+		height: 100%;
+		box-sizing: border-box;
+	}
+	.link_standart_for_div {
+		display: block; /* Ссылка как блочный элемент */
+		text-align: center; /* Выравнивание по центру */
+		height: 100%; /* Высота на весь слой */
+		color: black; /* Цвет ссылки */
+	}
+	img {
+		width: 100%;
+		height: 100%;
+	}
 
-li {
-    list-style-type: none; /* Убираем маркеры */
-}
+	li {
+		list-style-type: none; /* Убираем маркеры */
+	}
 
-ul {
-    margin:0;
-    margin-left: 0; /* Отступ слева в браузере IE и Opera */
-    padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
-}
+	ul {
+		margin:0;
+		margin-left: 0; /* Отступ слева в браузере IE и Opera */
+		padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+	}
 
-.div_inline_block {
-    display: inline-block;
-    vertical-align: top;
-}
-body{
-	/*margin: 0;*/
-	position: relative;
-}
-/*---------------------------------------------------------------------------------------*/
-div.main_div{
-position: relative;
-}
+	.div_inline_block {
+		display: inline-block;
+		vertical-align: top;
+	}
+	body{
+		/*margin: 0;*/
+		position: relative;
+	}
+	/*---------------------------------------------------------------------------------------*/
+	div.main_div{
+		position: relative;
+	}
 
-div.main_top_div{
-	height: 100px;
-	border: 1px solid black;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 10;
-}
-div.main_block_left{
-	width: 30%;
-	border: 1px solid black;
-	min-height: 500px;
-	overflow: hidden;
-	transition: 1s;
-	position: absolute;
-}
-div.main_block_right{
-	width: 68%;
-min-height: 500px;
-	border: 1px solid black;
-	overflow: hidden;
-	transition: 1s;
-	position: absolute;
-}
-div.div_for_block{
-	margin-top: 100px;
-	margin-left: 50px;
-	position: relative;
-	/*min-width: 600px;*/
-}
-div.div_left_column{
-	width: 55px;
-	height: 1000px;
-	position: fixed;
-	top: 100px;
-	left: 0;
-	border: 1px solid black;
-}
-div.div_search{
-border: 1px solid black;
-width: 55px;
-height: 100%;
-transition: 1s;
-overflow: hidden;
-white-space: nowrap;
-}
+	div.main_top_div{
+		height: 100px;
+		border: 1px solid black;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 10;
+	}
+	div.main_block_left{
+		width: 30%;
+		border: 1px solid black;
+		min-height: 500px;
+		overflow: hidden;
+		transition: 1s;
+		position: absolute;
+	}
+	div.main_block_right{
+		width: 68%;
+		min-height: 500px;
+		border: 1px solid black;
+		overflow: hidden;
+		transition: 1s;
+		position: absolute;
+	}
+	div.div_for_block{
+		margin-top: 100px;
+		margin-left: 50px;
+		position: relative;
+		/*min-width: 600px;*/
+	}
+	div.div_left_column{
+		width: 55px;
+
+		position: fixed;
+		top: 100px;
+		left: 0;
+		border: 1px solid black;
+	}
+	div.div_search{
+		border: 1px solid black;
+		width: 55px;
+		height: 100%;
+		transition: 1s;
+		overflow: hidden;
+		white-space: nowrap;
+	}
 /* div.div_search:hover{
 	width: 300px;
-} */
-div.div_settings_block{
-width: 100px;
-top: 0;
-margin: auto;
-	border: 1px solid black;
-height: 100%;
-position: absolute;
-transition: 1s;
-}
-div.div_search_img{
-	width: 50px;
+	} */
+	div.div_settings_block{
+		width: 100px;
+		top: 0;
+		margin: auto;
+		border: 1px solid black;
+		height: 100%;
+		position: absolute;
+		transition: 1s;
+	}
+	div.div_search_img{
+		width: 50px;
 		height: 50px;
-	 border-radius: 50%;
-	 border: 1px solid black;
-	 position: relative;
-	 cursor: pointer;
-}
+		border-radius: 50%;
+		border: 1px solid black;
+		position: relative;
+		cursor: pointer;
+	}
 
-div.div_search_input_block{
-	height: 20px;
-	width: 200px;
-	
-	left: 55px;
-	top: 0;
-}
-div.div_for_top_menu{
-	position: absolute;
-	width: 100%;
-	height: 50px;
-	top: -60px;
-	left: 100px;
-	transition: 1s;
-}
-div.div_settings_left_b{
-	height:0px;
-    width:0px;
-    border-left:40px solid black;
-    border-bottom:20px solid transparent;
-    border-top:20px solid transparent;
-    cursor: pointer;
-}
-div.div_settings_right_b{
-	height:0px;
-    width:0px;
-    border-right: 40px solid black;
-    border-bottom:20px solid transparent;
-    border-top:20px solid transparent;
-cursor: pointer;
-}
-div.div_settings_centre_b{
-	width: 10px;
-	background-color: black;
-	height: 50px;
-}
-div.div_settings_bottom_b{
-	height:0px;
-    width:0px;
-    border-right: 20px solid transparent;
-    border-left:20px solid transparent;
-    border-top:40px solid black;
-    margin: auto;
-cursor: pointer;
-}
-div.div_settings_top_b{
-	height:0px;
-    width:0px;
-    border-right: 20px solid transparent;
-    border-left:20px solid transparent;
-    border-bottom:40px solid black;
-    margin: auto;
-cursor: pointer;
-}
-div.top_menu_button{
-	border-radius: 50%;
-	border: 2px solid black;
-	background-color: grey;
-	width: 50px;
-	height: 50px;
-	font-size: 50pt;
-	position: relative;
-	cursor: pointer;
-	color: white;
-}
-div.top_menu_button:hover{
-background-color: blue;
-color: black;
-}
-div.top_menu_add_section:before{
-	content: '+';
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	left: 6px;
-	top: -12px;
+	div.div_search_input_block{
+		height: 20px;
+		width: 200px;
 
-}
-div.top_menu_add_article:before{
-	content: '+';
-	position: absolute;
-	width: 50px;
-	height: 50px;
-	left: 6px;
-	top: -12px;
-}
-div.top_menu_dell_select:before{
-	content: '-';
-	position: absolute;
-	width: 50px;
-	height: 50px;
-	left: 13px;
-	top: -19px;
-}
-	</style>
-	<script>
+		left: 55px;
+		top: 0;
+	}
+	div.div_for_top_menu{
+		position: absolute;
+		width: 100%;
+		height: 50px;
+		top: -60px;
+		left: 100px;
+		transition: 1s;
+	}
+	div.div_settings_left_b{
+		height:0px;
+		width:0px;
+		border-left:40px solid black;
+		border-bottom:20px solid transparent;
+		border-top:20px solid transparent;
+		cursor: pointer;
+	}
+	div.div_settings_right_b{
+		height:0px;
+		width:0px;
+		border-right: 40px solid black;
+		border-bottom:20px solid transparent;
+		border-top:20px solid transparent;
+		cursor: pointer;
+	}
+	div.div_settings_centre_b{
+		width: 10px;
+		background-color: black;
+		height: 50px;
+		cursor: e-resize;
+	}
+	div.div_settings_bottom_b{
+		height:0px;
+		width:0px;
+		border-right: 20px solid transparent;
+		border-left:20px solid transparent;
+		border-top:40px solid black;
+		margin: auto;
+		cursor: pointer;
+	}
+	div.div_settings_top_b{
+		height:0px;
+		width:0px;
+		border-right: 20px solid transparent;
+		border-left:20px solid transparent;
+		border-bottom:40px solid black;
+		margin: auto;
+		cursor: pointer;
+	}
+	div.top_menu_button{
+		border-radius: 50%;
+		border: 2px solid black;
+		background-color: grey;
+		width: 50px;
+		height: 50px;
+		font-size: 50pt;
+		position: relative;
+		cursor: pointer;
+		color: white;
+	}
+	div.top_menu_button:hover{
+		background-color: blue;
+		color: black;
+	}
+	div.top_menu_add_section:before{
+		content: '+';
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		left: 6px;
+		top: -12px;
+
+	}
+	div.top_menu_add_article:before{
+		content: '+';
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		left: 6px;
+		top: -12px;
+	}
+	div.top_menu_dell_select:before{
+		content: '-';
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		left: 13px;
+		top: -19px;
+	}
+	div.scroll_top_button{
+		height: 50px;
+		width: 50px;
+		border: 2px solid black;
+		font-size: 50pt;
+		font-weight: 600;
+		background-color: blue;
+		color: white;
+		overflow: hidden;
+		position: relative;
+
+	}
+	div.scroll_top_button:hover{
+		background-color: white;
+		color: blue;
+		cursor: pointer;
+	}
+
+	div.scroll_top_button:before{
+		content: '^';
+		position: absolute;
+		left: 6px;
+		top: 0px;
+		width: 1px;
+		height: 1px;
+	}
+</style>
+<script>
 
 //TODO
 /*
@@ -218,13 +245,24 @@ div.top_menu_dell_select:before{
 <!--<button onclick="console.log('sdf')">11111111111111111111111</button>-->
 
 когда смещаю влево блок с кнопками смещать правее блок menu или вообще его на постоянку переместить правее и смотреть что бы его не перекрывала кнопка поиска
-слева в строке кнопку для подъема наверх
+
 колонку слева высоту ей задавать js
 линия в блоке сверху сделать что бы ей можно было менять рамеры divов
 слева человеческий список сделать
 реальзация поиска
 кнопка круглая будет именно кнопкой для поиска
 добавить тени и css
+//TODO прикрутить это что бы при клики правой и зажатой левой возвращалось назад и корды хранить в объекте 
+добавить скролл по y для блоков
+
+document.onmousemove   проверки на выход за границы
+ширину divов левого и правого задавать из js а не css
+при перемещении блока настроек переносить блок с поиском
+
+
++++++++
+слева в строке кнопку для подъема наверх
+
 */
 
 
@@ -233,9 +271,71 @@ div.top_menu_dell_select:before{
 		//console.log(client_width);
 		var client_width=0;
 		var client_heigth=0;
-		var x_centre=0;
+		var x_centre=0;//относительно всего экрана(от левого края БРАУЗЕРА)
+		var change_x_centre_object={};
+		change_x_centre_object.click_change_x_centre=null;
+	//change_x_centre_object.coords=null;
 		
 		document.addEventListener("DOMContentLoaded", page_first_start);
+
+document.onmouseup=function(e) {
+click_on_centre_settings(false);
+}
+document.onmousedown=function(e) {
+	if(event.which == 3){
+		//TODO прикрутить это что бы при клики правой и зажатой левой возвращалось назад и корды хранить в объекте 
+		click_on_centre_settings(false);
+	}
+
+}
+
+document.onmousemove = function(e) {
+if(change_x_centre_object.click_change_x_centre==true){
+	//TODO проверки что бы за края не выходило
+	//var src_div=document.getElementById("div_search_id");
+	//TODO переменная для проверок??
+	var centre=event.clientX;//-src_div.offsetWidth
+//TODO после проверок
+x_centre=centre;
+
+
+var sett_block=document.getElementById("div_settings_block_id");
+var left_div=document.getElementById("main_block_left_id");
+var right_div=document.getElementById("main_block_right_id");
+
+sett_block.style.left=(centre-sett_block.offsetWidth/2)+'px';//-sett_block.offsetWidth/2
+if(sett_block.getBoundingClientRect().left<310){
+move_search_div(450);
+}
+else if(document.getElementById("div_search_id").getBoundingClientRect().right>50){
+move_search_div(0);
+}
+
+
+var left_line_div=document.getElementById("div_left_column_id");
+left_div.style.width=centre-left_line_div.offsetWidth-5+'px';
+left_div.style.display='block';
+right_div.style.left=centre-left_line_div.offsetWidth+5+'px';
+right_div.style.width=client_width-centre-5+'px';
+
+//console.log(centre);
+
+
+
+//TODO прикрутить это что бы при клики правой и зажатой левой возвращалось назад и корды хранить в объекте 
+// event.which == 1 – левая кнопка
+// event.which == 2 – средняя кнопка
+// event.which == 3 – правая кнопка
+}
+}
+		function up() {
+			var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+			if (top > 0) {
+				window.scrollBy(0, -100);
+				time_for_page_up = setTimeout('up()', 20);
+			} else clearTimeout(time_for_page_up);
+			return false;
+		}
 
 
 		function page_first_start(){
@@ -252,91 +352,134 @@ div.top_menu_dell_select:before{
 			setting_div.style.left=x_centre-(setting_div.offsetWidth/2)+'px';//marginLeft
 			//left_div.style.width = (client_width-left_line_divoffsetWidth)*0.3 +'px;'
 			//right_div.style.width = (client_width-left_line_divoffsetWidth)*0.7 +'px;'
+			left_line_div.style.height = client_heigth+'px'
 
 			var right_div=document.getElementById("main_block_right_id");
 			right_div.style.left=left_div.offsetWidth+5+'px';
+
+			var left_top_button=document.getElementById("scroll_top_button_id");
+			left_top_button.style.marginTop = client_heigth/2+'px';
 		}
+
+
 		function show_top_menu(){
-var top_menu=document.getElementById("div_for_top_menu_id");
-var top_setings=document.getElementById("div_settings_block_id");
-top_menu.style.top="0";
-top_setings.style.top="70px";
-var ch=document.getElementById("div_settings_bottom_b_ex");
-ch.innerHTML="<div class='div_settings_top_b' onclick='hidden_top_menu()'></div>";
+			var top_menu=document.getElementById("div_for_top_menu_id");
+			var top_setings=document.getElementById("div_settings_block_id");
+			top_menu.style.top="0";
+			top_setings.style.top="70px";
+			var ch=document.getElementById("div_settings_bottom_b_ex");
+			ch.innerHTML="<div class='div_settings_top_b' onclick='hidden_top_menu()'></div>";
 		}
+
+
 		function hidden_top_menu(){
-var top_menu=document.getElementById("div_for_top_menu_id");
-var top_setings=document.getElementById("div_settings_block_id");
-top_menu.style.top="-70px";
-top_setings.style.top="0";
-var ch=document.getElementById("div_settings_bottom_b_ex");
-ch.innerHTML="<div class='div_settings_bottom_b' onclick='show_top_menu()'></div>";
+			var top_menu=document.getElementById("div_for_top_menu_id");
+			var top_setings=document.getElementById("div_settings_block_id");
+			top_menu.style.top="-70px";
+			top_setings.style.top="0";
+			var ch=document.getElementById("div_settings_bottom_b_ex");
+			ch.innerHTML="<div class='div_settings_bottom_b' onclick='show_top_menu()'></div>";
 
 		}
+
+
 		function show_left_menu(){
-var left_div=document.getElementById("main_block_left_id");
-var setting_div=document.getElementById("div_settings_block_id");
-var right_div=document.getElementById("main_block_right_id");
-var left_line_div=document.getElementById("div_left_column_id");
-right_div.style.width = '';
-left_div.style.display = 'block';
+			var left_div=document.getElementById("main_block_left_id");
+			var setting_div=document.getElementById("div_settings_block_id");
+			var right_div=document.getElementById("main_block_right_id");
+			var left_line_div=document.getElementById("div_left_column_id");
+			right_div.style.width = '';
+			left_div.style.display = 'block';
 right_div.style.left =left_div.offsetWidth+5+'px';//left_line_div.offsetWidth
 var top_setings=document.getElementById("div_settings_block_id");
 top_setings.style.left=x_centre-(setting_div.offsetWidth/2)+'px';
 
-var search_div=document.getElementById("div_search_id");
-search_div.style.marginLeft = '0';
-		}
-		function hidden_left_menu(){
-var left_div=document.getElementById("main_block_left_id");
+move_search_div(0);
 
-var right_div=document.getElementById("main_block_right_id");
-var left_line_div=document.getElementById("div_left_column_id");
-right_div.style.width = (client_width-left_line_div.offsetWidth)+'px';
+}
+
+
+function hidden_left_menu(){
+	var left_div=document.getElementById("main_block_left_id");
+
+	var right_div=document.getElementById("main_block_right_id");
+	var left_line_div=document.getElementById("div_left_column_id");
+	right_div.style.width = (client_width-left_line_div.offsetWidth)+'px';
 right_div.style.left =0;//left_line_div.offsetWidth
 var top_setings=document.getElementById("div_settings_block_id");
 top_setings.style.left=left_line_div.offsetWidth-(top_setings.offsetWidth/2)+'px';
 left_div.style.display = 'none';
-var search_div=document.getElementById("div_search_id");
-search_div.style.marginLeft = '300px';
-		}
+move_search_div(300);
+}
+
+
 function show_search_block(){
 	var div=document.getElementById("div_search_id");
 	div.style.width = '300px';
 	
 }
+
+
 function hidden_search_block(){
-var div=document.getElementById("div_search_id");
+	var div=document.getElementById("div_search_id");
 	div.style.width = '55px';
 }
 
-	</script>
+function start_search(){
+
+
+}
+function click_on_centre_settings(flag){
+change_x_centre_object.click_change_x_centre=flag;
+var sett_block=document.getElementById("div_settings_block_id");
+var left_div=document.getElementById("main_block_left_id");
+var right_div=document.getElementById("main_block_right_id");
+if(flag==true){
+	sett_block.style.transition='0s';
+	left_div.style.transition='0s';
+	right_div.style.transition='0s';
+}
+else{
+sett_block.style.transition='1s';
+left_div.style.transition='1s';
+right_div.style.transition='1s';
+}
+
+}
+// function click_up_on_centre_settings(){
+
+// }
+function move_search_div(marginleft){
+var search_div=document.getElementById("div_search_id");
+search_div.style.marginLeft = marginleft+'px';
+}
+</script>
 </head><body>
 	
 	<div class="main_div">
-	<div class="main_top_div">
-		<div class="div_for_top_menu" id="div_for_top_menu_id">
-		<div class="div_inline_block top_menu_button top_menu_add_section"></div>
-		<div class="div_inline_block top_menu_button top_menu_add_article"></div>
-		<div class="div_inline_block top_menu_button top_menu_dell_select"></div>
-	</div>
-		<div class="div_inline_block div_search" id="div_search_id" onmouseout='hidden_search_block()' onmouseover='show_search_block()'>
-			<div class="div_search_img div_inline_block"></div>
-			<div class="div_inline_block div_search_input_block"> <input type="text"></div>
-		</div>
-		<div class="div_inline_block div_settings_block" id="div_settings_block_id">
-			<div>
-				<div class="div_inline_block"><div class="div_settings_left_b" onclick="show_left_menu()"></div></div>
-				<div  class="div_inline_block"><div class="div_settings_centre_b"></div></div>
-				<div class="div_inline_block"><div class="div_settings_right_b" onclick="hidden_left_menu()"></div></div>
+		<div class="main_top_div">
+			<div class="div_for_top_menu" id="div_for_top_menu_id">
+				<div class="div_inline_block top_menu_button top_menu_add_section"></div>
+				<div class="div_inline_block top_menu_button top_menu_add_article"></div>
+				<div class="div_inline_block top_menu_button top_menu_dell_select"></div>
 			</div>
-			<div id="div_settings_bottom_b_ex"><div class="div_settings_bottom_b" onclick="show_top_menu()"></div></div>
+			<div class="div_inline_block div_search" id="div_search_id" onmouseout='hidden_search_block()' onmouseover='show_search_block()'>
+				<div class="div_search_img div_inline_block" onclick="start_search()"></div>
+				<div class="div_inline_block div_search_input_block"> <input type="text"></div>
+			</div>
+			<div class="div_inline_block div_settings_block" id="div_settings_block_id">
+				<div>
+					<div class="div_inline_block"><div class="div_settings_left_b" onclick="show_left_menu()"></div></div>
+					<div  class="div_inline_block"><div class="div_settings_centre_b" onmouseup="click_on_centre_settings(false)" onmousedown="click_on_centre_settings(true)"></div></div>
+					<div class="div_inline_block"><div class="div_settings_right_b" onclick="hidden_left_menu()"></div></div>
+				</div>
+				<div id="div_settings_bottom_b_ex"><div class="div_settings_bottom_b" onclick="show_top_menu()"></div></div>
+			</div>
 		</div>
+		<div class="div_left_column" id="div_left_column_id"><div class="scroll_top_button" id="scroll_top_button_id" onclick="up()"></div></div>
+		<div class="div_inline_block div_for_block" id="div_for_block_id"><div class="div_inline_block main_block_left" id="main_block_left_id"></div>
+		<div class="div_inline_block  main_block_right" id="main_block_right_id"></div></div>
 	</div>
-	<div class="div_left_column" id="div_left_column_id"></div>
-	<div class="div_inline_block div_for_block" id="div_for_block_id"><div class="div_inline_block main_block_left" id="main_block_left_id"></div>
-<div class="div_inline_block  main_block_right" id="main_block_right_id"></div></div>
-</div>
 
 
 
