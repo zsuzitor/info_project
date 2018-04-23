@@ -257,7 +257,7 @@
 //TODO прикрутить это что бы при клики правой и зажатой левой возвращалось назад и корды хранить в объекте 
 +проверить добавить скролл по х для блоков
 
-document.onmousemove   проверки на выход за границы
++проверить document.onmousemove   проверки на выход за границы
 ширину divов левого и правого задавать из js а не css
 при перемещении блока настроек переносить блок с поиском
 
@@ -297,13 +297,19 @@ if(change_x_centre_object.click_change_x_centre==true){
 var sett_block=document.getElementById("div_settings_block_id");
 var left_line_div=document.getElementById("div_left_column_id");
 var cord_mouse=event.clientX;
+var right_div=document.getElementById("main_block_right_id");
 if(sett_block.getBoundingClientRect().left<=left_line_div.offsetWidth){
-sett_block.style.left=(left_line_div.offsetWidth+sett_block.offsetWidth/2)+"px";
+//sett_block.style.left=(left_line_div.offsetWidth+sett_block.offsetWidth/2)+"px";
 
 cord_mouse=left_line_div.offsetWidth;
 
 }
+if(sett_block.getBoundingClientRect().right>=right_div.getBoundingClientRect().right){
+//sett_block.style.left=(left_line_div.offsetWidth+sett_block.offsetWidth/2)+"px";
 
+cord_mouse=right_div.getBoundingClientRect().right;
+
+}
 
 
 
@@ -320,7 +326,7 @@ x_centre=centre;
 
 
 var left_div=document.getElementById("main_block_left_id");
-var right_div=document.getElementById("main_block_right_id");
+
 
 sett_block.style.left=(centre-sett_block.offsetWidth/2)+'px';//-sett_block.offsetWidth/2
 if(sett_block.getBoundingClientRect().left<310){
