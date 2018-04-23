@@ -58,6 +58,7 @@
 		overflow: hidden;
 		transition: 1s;
 		position: absolute;
+		overflow-x: auto;
 	}
 	div.main_block_right{
 		width: 68%;
@@ -66,6 +67,7 @@
 		overflow: hidden;
 		transition: 1s;
 		position: absolute;
+		overflow-x: auto;
 	}
 	div.div_for_block{
 		margin-top: 100px;
@@ -246,14 +248,14 @@
 
 когда смещаю влево блок с кнопками смещать правее блок menu или вообще его на постоянку переместить правее и смотреть что бы его не перекрывала кнопка поиска
 
-колонку слева высоту ей задавать js
-линия в блоке сверху сделать что бы ей можно было менять рамеры divов
+//колонку слева высоту ей задавать js
+//линия в блоке сверху сделать что бы ей можно было менять рамеры divов
 слева человеческий список сделать
 реальзация поиска
 кнопка круглая будет именно кнопкой для поиска
 добавить тени и css
 //TODO прикрутить это что бы при клики правой и зажатой левой возвращалось назад и корды хранить в объекте 
-добавить скролл по y для блоков
++проверить добавить скролл по х для блоков
 
 document.onmousemove   проверки на выход за границы
 ширину divов левого и правого задавать из js а не css
@@ -292,14 +294,31 @@ document.onmousedown=function(e) {
 document.onmousemove = function(e) {
 if(change_x_centre_object.click_change_x_centre==true){
 	//TODO проверки что бы за края не выходило
+var sett_block=document.getElementById("div_settings_block_id");
+var left_line_div=document.getElementById("div_left_column_id");
+var cord_mouse=event.clientX;
+if(sett_block.getBoundingClientRect().left<=left_line_div.offsetWidth){
+sett_block.style.left=(left_line_div.offsetWidth+sett_block.offsetWidth/2)+"px";
+
+cord_mouse=left_line_div.offsetWidth;
+
+}
+
+
+
+
+
+
+
+
 	//var src_div=document.getElementById("div_search_id");
 	//TODO переменная для проверок??
-	var centre=event.clientX;//-src_div.offsetWidth
+	var centre=cord_mouse;//-src_div.offsetWidth
 //TODO после проверок
 x_centre=centre;
 
 
-var sett_block=document.getElementById("div_settings_block_id");
+
 var left_div=document.getElementById("main_block_left_id");
 var right_div=document.getElementById("main_block_right_id");
 
@@ -312,7 +331,7 @@ move_search_div(0);
 }
 
 
-var left_line_div=document.getElementById("div_left_column_id");
+
 left_div.style.width=centre-left_line_div.offsetWidth-5+'px';
 left_div.style.display='block';
 right_div.style.left=centre-left_line_div.offsetWidth+5+'px';
