@@ -256,7 +256,7 @@
 добавить тени и css
 //TODO прикрутить это что бы при клики правой и зажатой левой возвращалось назад и корды хранить в объекте 
 +проверить добавить скролл по х для блоков
-
+хранить последнеий нажатый блок
 +проверить document.onmousemove   проверки на выход за границы
 ширину divов левого и правого задавать из js а не css
 при перемещении блока настроек переносить блок с поиском
@@ -471,6 +471,19 @@ right_div.style.transition='1s';
 }
 
 }
+
+
+function add_section(){
+//div_for_adds_info_id
+}
+
+function add_article(){
+
+}
+
+function dell_select(){
+
+}
 // function click_up_on_centre_settings(){
 
 // }
@@ -480,13 +493,13 @@ search_div.style.marginLeft = marginleft+'px';
 }
 </script>
 </head><body>
-	
+	<div class="div_for_adds_info" id="div_for_adds_info_id"></div>
 	<div class="main_div">
 		<div class="main_top_div">
 			<div class="div_for_top_menu" id="div_for_top_menu_id">
-				<div class="div_inline_block top_menu_button top_menu_add_section"></div>
-				<div class="div_inline_block top_menu_button top_menu_add_article"></div>
-				<div class="div_inline_block top_menu_button top_menu_dell_select"></div>
+				<div class="div_inline_block top_menu_button top_menu_add_section" onclick='add_section()'></div>
+				<div class="div_inline_block top_menu_button top_menu_add_article" onclick='add_article()'></div>
+				<div class="div_inline_block top_menu_button top_menu_dell_select" onclick='dell_select()'></div>
 			</div>
 			<div class="div_inline_block div_search" id="div_search_id" onmouseout='hidden_search_block()' onmouseover='show_search_block()'>
 				<div class="div_search_img div_inline_block" onclick="start_search()"></div>
