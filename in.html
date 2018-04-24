@@ -60,6 +60,7 @@
 		transition: 1s;
 		position: absolute;
 		overflow-x: auto;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	}
 	div.main_block_right{
 		width: 68%;
@@ -69,6 +70,7 @@
 		transition: 1s;
 		position: absolute;
 		overflow-x: auto;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	}
 	div.div_for_block{
 		margin-top: 100px;
@@ -78,7 +80,7 @@
 	}
 	div.div_left_column{
 		width: 55px;
-
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 		position: fixed;
 		top: 100px;
 		left: 0;
@@ -91,6 +93,7 @@
 		transition: 1s;
 		overflow: hidden;
 		white-space: nowrap;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	}
 /* div.div_search:hover{
 	width: 300px;
@@ -103,6 +106,7 @@
 		height: 100%;
 		position: absolute;
 		transition: 1s;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	}
 	div.div_search_img{
 		width: 50px;
@@ -111,6 +115,8 @@
 		border: 1px solid black;
 		position: relative;
 		cursor: pointer;
+		box-shadow: 0 0 15px rgba(0,0,0,0.5);
+		transition: 1s;
 	}
 
 	div.div_search_input_block{
@@ -143,12 +149,14 @@
 		border-bottom:20px solid transparent;
 		border-top:20px solid transparent;
 		cursor: pointer;
+		
 	}
 	div.div_settings_centre_b{
 		width: 10px;
 		background-color: black;
 		height: 50px;
 		cursor: e-resize;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	}
 	div.div_settings_bottom_b{
 		height:0px;
@@ -158,6 +166,7 @@
 		border-top:40px solid black;
 		margin: auto;
 		cursor: pointer;
+		
 	}
 	div.div_settings_top_b{
 		height:0px;
@@ -167,6 +176,7 @@
 		border-bottom:40px solid black;
 		margin: auto;
 		cursor: pointer;
+
 	}
 	div.top_menu_button{
 		border-radius: 50%;
@@ -218,6 +228,7 @@
 		color: white;
 		overflow: hidden;
 		position: relative;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 
 	}
 	div.scroll_top_button:hover{
@@ -241,26 +252,80 @@
 		display: none;
 	}
 
-div.div_one_section_name{
-	border: 2px solid black;
-	font-size: 20pt;
-	color: red;
-	cursor: pointer;
-}
+	div.div_one_section_name{
+		border: 1px solid black;
+		font-size: 25pt;
+		color: red;
+		cursor: pointer;
+		height: 40px;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	}
 
-div.div_inside_articles{
-background-color: #98FB98;
-}
-div.div_inside_sections{
-background-color: #FFFFE0;
-}
+	div.div_inside_articles{
+		background-color: #98FB98;
+		margin-left: 10px;
+		border-left: 1px solid black;
+		cursor: pointer;
+		font-size: 20pt;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 
+	}
+	div.div_inside_sections{
+		background-color: #FFFFE0;
+		margin-left: 10px;
+	}
+
+
+	span.lupa{height:40px; width:40px; display:block; position:relative;
+		left: 5px;
+		top: 5px;
+	}
+	
+	.lupa:before, .lupa:after{content:''; height:20px; display:block; position:absolute; top:0; left:0; }
+	
+	.lupa:before{width:20px; border:3px #333 solid; border-radius:100%;-webkit-border-radius:100%;-moz-border-radius:100%;}
+	
+	.lupa:after{width:7px; background:#333; transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg); top:17px; left:24px;}
+
+span.home {
+    height: 0px;
+    width: 0px;
+    border-width: 16px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
+    position: absolute;
+    top: -8px;
+    left: 8px;
+ 
+}
+ 
+span.home:after {
+    content: '';
+    width: 5px;
+    height: 16px;
+    background-color: transparent;
+    position: absolute;
+    top: 16px;
+    right: -11px;
+    border-left: 8px solid #333;
+    border-right: 8px solid #333;
+}
+ 
+span.home:before {
+    content: '';
+    width: 9px;
+    height: 6px;
+    background-color: #333;
+    position: absolute;
+    top: 16px;
+    right: -5px;
+}
 
 
 
 </style>
 <script>
-
+// box-shadow: 0 0 10px rgba(0,0,0,0.5);
 //TODO
 /*
 <!--TODO-->
@@ -291,7 +356,12 @@ background-color: #FFFFE0;
 после каждого действия (сохранния удаления сохранять это действие в json и в html)
 клик который открывает меню слева должен скрывать меню справа если меню слева уже открыто
 блок настроек сейчас немного не симметрично расположен 1-2 пикселя
-
+кнопка для закрытия всех вкладок
+hidden_search_block мб не нужен и тот что рядом тоже
+старт при маленьком экране блок настроек налезает на блок с поиском
+возможность редактирования выделенного объекта
+на стороне сервера или js если сохраняется код html то надо "<>" заменять на "&lt; и &gt;"   //При этом тег <p> будет выглядеть как &lt;p&gt;
+для прозрачных элементов background
 
 
 
@@ -301,14 +371,17 @@ background-color: #FFFFE0;
 */
 
 
-
-
 		//console.log(client_width);
 		var client_width=0;
 		var client_heigth=0;
 		var x_centre=0;//относительно всего экрана(от левого края БРАУЗЕРА)
 		var change_x_centre_object={};
 		change_x_centre_object.click_change_x_centre=null;
+
+		var mass_section=null;
+		var mass_article=null;
+
+
 	//change_x_centre_object.coords=null;
 
 	document.addEventListener("DOMContentLoaded", page_first_start);
@@ -420,8 +493,8 @@ function page_first_start(){
 
 
 //
-function test__(id){
-	var res="<div id='div_one_section_inside_"+id+"'><div class='div_inside_sections'>";
+function load_one_section(id){
+	var res="<div style='display:none;' id='div_one_section_inside_"+id+"'><div class='div_inside_sections'>";
 
 	var mass_with_id=[];
 	for(var i=0;i<mass_section.length;++i){
@@ -433,87 +506,98 @@ function test__(id){
 
 
 
-for(var i=0;i<mass_with_id.length;++i){
-	res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+mass_with_id[i]+"'>"+ (function(id){
-	for(var i=0;i<mass_section.length;++i)
-if(mass_section[i].Id==id)
-return mass_section[i];
-})(mass_with_id[i]).Head+"</div>";
-	res+=test__(mass_with_id[i]);
-}
+	for(var i=0;i<mass_with_id.length;++i){
+		res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+mass_with_id[i]+"'>"+ (function(id){
+			for(var i=0;i<mass_section.length;++i)
+				if(mass_section[i].Id==id)
+					return mass_section[i];
+			})(mass_with_id[i]).Head+"</div>";
+			res+=load_one_section(mass_with_id[i]);
+		}
 
-res+="</div><div class='div_inside_articles'>";
+		res+="</div><div class='div_inside_articles'>";
 
-for(var i=0;i<mass_article.length;++i){
-	if(mass_article[i].Section_id==id){
-		res+="<div>";
-		res+="<div>"+mass_article[i].Head+"</div>";
+		for(var i=0;i<mass_article.length;++i){
+			if(mass_article[i].Section_id==id){
+				res+="<div>";
+				res+="<div onclick='load_article("+mass_article[i].Id+")'>"+mass_article[i].Head+"</div>";
 		//res+="<div>"+mass_article[i].Body+"</div>";
 
 		res+="</div>";
 	}
-
-
-
 }
-
-
 
 res+="</div></div>";
 return res;
 }
-
-
-
 			//-------------------------
-			var mass_section=JSON.parse(document.getElementById("string_base_info_sections").value);
-			var mass_article=JSON.parse(document.getElementById("string_base_info_articles").value);
-			var str_res_for_left_ul=test__(1);
+			mass_section=JSON.parse(document.getElementById("string_base_info_sections").value);
+			mass_article=JSON.parse(document.getElementById("string_base_info_articles").value);
+			var str_res_for_left_ul=load_one_section(1);
 			left_div.innerHTML="<div class=''><div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'>"+'ALL'+"</div>"+str_res_for_left_ul+"</div>";
 
-
-
-
 		}
 
 
-function click_name_section(a){
-	var div=document.getElementById("div_one_section_inside_"+a.id.split('_')[4]);
-	if(div.style.display==''||div.style.display=='block')
-	div.style.display='none';
-else
-	div.style.display='block';
-	
-}
-
-		function show_top_menu(){
-			var top_menu=document.getElementById("div_for_top_menu_id");
-			var top_setings=document.getElementById("div_settings_block_id");
-			top_menu.style.top="0";
-			top_setings.style.top="70px";
-			var ch=document.getElementById("div_settings_bottom_b_ex");
-			ch.innerHTML="<div class='div_settings_top_b' onclick='hidden_top_menu()'></div>";
+		function click_name_section(a){
+			var div=document.getElementById("div_one_section_inside_"+a.id.split('_')[4]);
+			if(div.style.display==''||div.style.display=='block')
+				div.style.display='none';
+			else
+				div.style.display='block';
+			
 		}
 
 
-		function hidden_top_menu(){
-			var top_menu=document.getElementById("div_for_top_menu_id");
-			var top_setings=document.getElementById("div_settings_block_id");
-			top_menu.style.top="-70px";
-			top_setings.style.top="0";
-			var ch=document.getElementById("div_settings_bottom_b_ex");
-			ch.innerHTML="<div class='div_settings_bottom_b' onclick='show_top_menu()'></div>";
+		function load_article(id_ar){
+			var acticle=null;
 
-		}
+			for(var i=0;i<mass_article.length;++i)
+				if(mass_article[i].Id==id_ar){
+					acticle=mass_article[i];
+					break;
+				}
+				var res="";
+				var right_div=document.getElementById("main_block_right_id");
+				res="<div>";
+				res+="<h1>";
+				res+=acticle.Head;
+				res+="<h1>";
+				res+="<div>";
+				res+=acticle.Body;
+				res+="</div>";
+				res+="</div>";
+				right_div.innerHTML=res;
+			}
+
+			function show_top_menu(){
+				var top_menu=document.getElementById("div_for_top_menu_id");
+				var top_setings=document.getElementById("div_settings_block_id");
+				top_menu.style.top="0";
+				top_setings.style.top="70px";
+				var ch=document.getElementById("div_settings_bottom_b_ex");
+				ch.innerHTML="<div class='div_settings_top_b' onclick='hidden_top_menu()'></div>";
+			}
 
 
-		function show_left_menu(){
-			var left_div=document.getElementById("main_block_left_id");
-			var setting_div=document.getElementById("div_settings_block_id");
-			var right_div=document.getElementById("main_block_right_id");
-			var left_line_div=document.getElementById("div_left_column_id");
-			right_div.style.width = '';
-			left_div.style.display = 'block';
+			function hidden_top_menu(){
+				var top_menu=document.getElementById("div_for_top_menu_id");
+				var top_setings=document.getElementById("div_settings_block_id");
+				top_menu.style.top="-70px";
+				top_setings.style.top="0";
+				var ch=document.getElementById("div_settings_bottom_b_ex");
+				ch.innerHTML="<div class='div_settings_bottom_b' onclick='show_top_menu()'></div>";
+
+			}
+
+
+			function show_left_menu(){
+				var left_div=document.getElementById("main_block_left_id");
+				var setting_div=document.getElementById("div_settings_block_id");
+				var right_div=document.getElementById("main_block_right_id");
+				var left_line_div=document.getElementById("div_left_column_id");
+				right_div.style.width = '';
+				left_div.style.display = 'block';
 right_div.style.left =left_div.offsetWidth+5+'px';//left_line_div.offsetWidth
 var top_setings=document.getElementById("div_settings_block_id");
 top_setings.style.left=x_centre-(setting_div.offsetWidth/2)+'px';
@@ -540,13 +624,16 @@ move_search_div(300);
 function show_search_block(){
 	var div=document.getElementById("div_search_id");
 	div.style.width = '300px';
-	
+	var div_img=document.getElementById("div_search_img_id");
+	div_img.style.transform='rotateY(180deg)';
 }
 
 
 function hidden_search_block(){
 	var div=document.getElementById("div_search_id");
 	div.style.width = '55px';
+	var div_img=document.getElementById("div_search_img_id");
+	div_img.style.transform='rotateY(0deg)';
 }
 
 function start_search(){
@@ -670,9 +757,10 @@ function move_search_div(marginleft){
 				<div class="div_inline_block top_menu_button top_menu_add_section" onclick='add_section()'></div>
 				<div class="div_inline_block top_menu_button top_menu_add_article" onclick='add_article()'></div>
 				<div class="div_inline_block top_menu_button top_menu_dell_select" onclick='dell_select()'></div>
+				<div class="div_inline_block top_menu_button top_menu_home_button" onclick=''><span class="home"></span></div>
 			</div>
 			<div class="div_inline_block div_search" id="div_search_id" onmouseout='hidden_search_block()' onmouseover='show_search_block()'>
-				<div class="div_search_img div_inline_block" onclick="start_search()"></div>
+				<div class="div_search_img div_inline_block" id='div_search_img_id' onclick="start_search()"><span class="lupa"></span></div>
 				<div class="div_inline_block div_search_input_block"> <input type="text"></div>
 			</div>
 			<div class="div_inline_block div_settings_block" id="div_settings_block_id">
