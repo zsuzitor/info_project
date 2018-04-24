@@ -36,6 +36,7 @@ namespace main_info
     {
         public int Id { get; set; }
         public int Parrent_id { get; set; }
+public string Head { get; set; }
         //public List<Section> Sections_list { get; set; }
         //public List<Section> Article_list { get; set; }
 
@@ -43,7 +44,7 @@ namespace main_info
         {
             Id = 0;
             Parrent_id = 0;
-
+Head ="";
         }
     }
     public partial class Form1 : Form

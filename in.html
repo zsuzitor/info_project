@@ -233,6 +233,30 @@
 		width: 1px;
 		height: 1px;
 	}
+	div.div_for_change_info{
+		display: none;
+	}
+	div.div_for_base_info{
+		display: none;
+	}
+
+div.div_one_section_name{
+	border: 2px solid black;
+	font-size: 20pt;
+	color: red;
+	cursor: pointer;
+}
+
+div.div_inside_articles{
+background-color: #98FB98;
+}
+div.div_inside_sections{
+background-color: #FFFFE0;
+}
+
+
+
+
 </style>
 <script>
 
@@ -260,8 +284,11 @@
 +проверить document.onmousemove   проверки на выход за границы
 ширину divов левого и правого задавать из js а не css
 при перемещении блока настроек переносить блок с поиском
-
-
+добавить резервное копирование и спрашивать о том нужно ли сохранение(мб просто кнопку в меню сверху)
+при удалении внешнего блока удалять все в нем но не его
+передавать в шарпа в json строке всю инфу которая нужна
+после каждого действия (сохранния удаления сохранять это действие в json и в html)
+клик который открывает меню слева должен скрывать меню справа если меню слева уже открыто
 +++++++
 слева в строке кнопку для подъема наверх
 
@@ -277,14 +304,14 @@
 		var change_x_centre_object={};
 		change_x_centre_object.click_change_x_centre=null;
 	//change_x_centre_object.coords=null;
-		
-		document.addEventListener("DOMContentLoaded", page_first_start);
 
-document.onmouseup=function(e) {
-click_on_centre_settings(false);
-}
-document.onmousedown=function(e) {
-	if(event.which == 3){
+	document.addEventListener("DOMContentLoaded", page_first_start);
+
+	document.onmouseup=function(e) {
+		click_on_centre_settings(false);
+	}
+	document.onmousedown=function(e) {
+		if(event.which == 3){
 		//TODO прикрутить это что бы при клики правой и зажатой левой возвращалось назад и корды хранить в объекте 
 		click_on_centre_settings(false);
 	}
@@ -292,25 +319,24 @@ document.onmousedown=function(e) {
 }
 
 document.onmousemove = function(e) {
-if(change_x_centre_object.click_change_x_centre==true){
+	if(change_x_centre_object.click_change_x_centre==true){
 	//TODO проверки что бы за края не выходило
-var sett_block=document.getElementById("div_settings_block_id");
-var left_line_div=document.getElementById("div_left_column_id");
-var cord_mouse=event.clientX;
-var right_div=document.getElementById("main_block_right_id");
-if(sett_block.getBoundingClientRect().left<=left_line_div.offsetWidth){
+	var sett_block=document.getElementById("div_settings_block_id");
+	var left_line_div=document.getElementById("div_left_column_id");
+	var cord_mouse=event.clientX;
+	var right_div=document.getElementById("main_block_right_id");
+	if(cord_mouse<left_line_div.getBoundingClientRect().right){//(sett_block.getBoundingClientRect().left+sett_block.offsetWidth/2)
 //sett_block.style.left=(left_line_div.offsetWidth+sett_block.offsetWidth/2)+"px";
 
-cord_mouse=left_line_div.offsetWidth;
+cord_mouse=left_line_div.getBoundingClientRect().right;
 
 }
-if(sett_block.getBoundingClientRect().right>=right_div.getBoundingClientRect().right){
-//sett_block.style.left=(left_line_div.offsetWidth+sett_block.offsetWidth/2)+"px";
-
-cord_mouse=right_div.getBoundingClientRect().right;
-
-}
-
+else
+// if(cord_mouse>right_div.getBoundingClientRect().right){//sett_block.getBoundingClientRect().right
+// cord_mouse=right_div.getBoundingClientRect().right;
+// }
+if((cord_mouse+sett_block.offsetWidth/2)>client_width)
+	cord_mouse=client_width-sett_block.offsetWidth/2;
 
 
 
@@ -330,10 +356,10 @@ var left_div=document.getElementById("main_block_left_id");
 
 sett_block.style.left=(centre-sett_block.offsetWidth/2)+'px';//-sett_block.offsetWidth/2
 if(sett_block.getBoundingClientRect().left<310){
-move_search_div(450);
+	move_search_div(450);
 }
 else if(document.getElementById("div_search_id").getBoundingClientRect().right>50){
-move_search_div(0);
+	move_search_div(0);
 }
 
 
@@ -353,18 +379,18 @@ right_div.style.width=client_width-centre-5+'px';
 // event.which == 3 – правая кнопка
 }
 }
-		function up() {
-			var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
-			if (top > 0) {
-				window.scrollBy(0, -100);
-				time_for_page_up = setTimeout('up()', 20);
-			} else clearTimeout(time_for_page_up);
-			return false;
-		}
+function up() {
+	var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+	if (top > 0) {
+		window.scrollBy(0, -100);
+		time_for_page_up = setTimeout('up()', 20);
+	} else clearTimeout(time_for_page_up);
+	return false;
+}
 
 
-		function page_first_start(){
-			client_width=document.documentElement.clientWidth;
+function page_first_start(){
+	client_width=document.documentElement.clientWidth;
 			//alert(client_width);
 			client_heigth=document.documentElement.clientHeight;
 			var left_div=document.getElementById("main_block_left_id");
@@ -384,8 +410,72 @@ right_div.style.width=client_width-centre-5+'px';
 
 			var left_top_button=document.getElementById("scroll_top_button_id");
 			left_top_button.style.marginTop = client_heigth/2+'px';
+
+
+
+//
+function test__(id){
+	var res="<div id='div_one_section_inside_"+id+"'><div class='div_inside_sections'>";
+
+	var mass_with_id=[];
+	for(var i=0;i<mass_section.length;++i){
+		if(mass_section[i].Parrent_id==id)
+			mass_with_id.push(mass_section[i].Id);
+	}
+	if(mass_with_id.length>0)
+		
+res+="<div  class='div_one_section_name'>"+ ((id)=>{
+	for(var i=0;i<mass_section.length;++i)
+if(mass_section[i].id==id)
+return mass_section[i];
+})(mass_with_id[i]).Head+"</div>";//TODO смотреть имя секции
+for(var i=0;i<mass_with_id.length;++i){
+	res+=test__(mass_with_id[i].Id);
+}
+
+res+="</div><div class='div_inside_articles'>";
+
+for(var i=0;i<mass_article.length;++i){
+	if(mass_article[i].Section_id==id){
+		res+="<div>";
+		res+="<div>"+mass_article[i].Head+"</div>";
+		//res+="<div>"+mass_article[i].Body+"</div>";
+
+		res+="</div>";
+	}
+
+
+
+}
+
+
+
+res+="</div></div>";
+return res;
+}
+
+
+
+			//-------------------------
+			var mass_section=JSON.parse(document.getElementById("string_base_info_sections").value);
+			var mass_article=JSON.parse(document.getElementById("string_base_info_articles").value);
+			var str_res_for_left_ul=test__(1);
+			left_div.innerHTML="<div class=''><div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'>"+'ALL'+"</div>"+str_res_for_left_ul+"</div>";
+
+
+
+
 		}
 
+
+function click_name_section(a){
+	var div=document.getElementById("div_one_section_inside_"+a.id.split('_')[4]);
+	if(div.style.display==''||div.style.display=='block')
+	div.style.display='none';
+else
+	div.style.display='block';
+	
+}
 
 		function show_top_menu(){
 			var top_menu=document.getElementById("div_for_top_menu_id");
@@ -455,20 +545,20 @@ function start_search(){
 
 }
 function click_on_centre_settings(flag){
-change_x_centre_object.click_change_x_centre=flag;
-var sett_block=document.getElementById("div_settings_block_id");
-var left_div=document.getElementById("main_block_left_id");
-var right_div=document.getElementById("main_block_right_id");
-if(flag==true){
-	sett_block.style.transition='0s';
-	left_div.style.transition='0s';
-	right_div.style.transition='0s';
-}
-else{
-sett_block.style.transition='1s';
-left_div.style.transition='1s';
-right_div.style.transition='1s';
-}
+	change_x_centre_object.click_change_x_centre=flag;
+	var sett_block=document.getElementById("div_settings_block_id");
+	var left_div=document.getElementById("main_block_left_id");
+	var right_div=document.getElementById("main_block_right_id");
+	if(flag==true){
+		sett_block.style.transition='0s';
+		left_div.style.transition='0s';
+		right_div.style.transition='0s';
+	}
+	else{
+		sett_block.style.transition='1s';
+		left_div.style.transition='1s';
+		right_div.style.transition='1s';
+	}
 
 }
 
@@ -488,12 +578,83 @@ function dell_select(){
 
 // }
 function move_search_div(marginleft){
-var search_div=document.getElementById("div_search_id");
-search_div.style.marginLeft = marginleft+'px';
+	var search_div=document.getElementById("div_search_id");
+	search_div.style.marginLeft = marginleft+'px';
 }
 </script>
 </head><body>
-	<div class="div_for_adds_info" id="div_for_adds_info_id"></div>
+	<div class="div_for_change_info" id="div_for_change_info_id"></div>
+	<div class="div_for_base_info" id="div_for_base_info_id">
+		<div id="one_section_base_id_1"></div>
+		<div id="one_section_base_id_2"></div>
+		<div id="one_section_base_id_3"></div>
+		<input type="hidden" id="string_base_info_sections" value='[
+		{
+			"Id": 1,
+			"Parrent_id": 0,
+			"Head": "id1"
+		},
+		{
+			"Id": 2,
+			"Parrent_id": 1,
+			"Head": "id2"
+		},
+		{
+			"Id": 3,
+			"Parrent_id": 1,
+			"Head": "id3"
+		},
+		{
+			"Id": 4,
+			"Parrent_id": 1,
+			"Head": "id4"
+		},
+		{
+			"Id": 5,
+			"Parrent_id": 2,
+			"Head": "id5"
+		},
+		{
+			"Id": 6,
+			"Parrent_id": 3,
+			"Head": "id6"
+		},
+		{
+			"Id": 7,
+			"Parrent_id": 6,
+			"Head": "id7"
+		}
+		]'>
+
+		<input type="hidden" id="string_base_info_articles" value='[
+		{
+			"Id": 1,
+			"Section_id": 1,
+			"Head": "head1",
+			"Body": "body1"
+		},
+		{
+			"Id": 2,
+			"Section_id": 7,
+			"Head": "head2",
+			"Body": "body2"
+		},
+		{
+			"Id": 3,
+			"Section_id": 6,
+			"Head": "head3",
+			"Body": "body3"
+		},
+		{
+			"Id": 4,
+			"Section_id": 5,
+			"Head": "head4",
+			"Body": "body4"
+		}
+		]'>
+
+
+	</div>
 	<div class="main_div">
 		<div class="main_top_div">
 			<div class="div_for_top_menu" id="div_for_top_menu_id">
