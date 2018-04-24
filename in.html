@@ -422,15 +422,16 @@ function test__(id){
 		if(mass_section[i].Parrent_id==id)
 			mass_with_id.push(mass_section[i].Id);
 	}
-	if(mass_with_id.length>0)
-		
-res+="<div  class='div_one_section_name'>"+ ((id)=>{
-	for(var i=0;i<mass_section.length;++i)
-if(mass_section[i].id==id)
-return mass_section[i];
-})(mass_with_id[i]).Head+"</div>";//TODO смотреть имя секции
+	//if(mass_with_id.length>0)
+	//	res+="<div></div>";
+
 for(var i=0;i<mass_with_id.length;++i){
-	res+=test__(mass_with_id[i].Id);
+	res+="<div  class='div_one_section_name'>"+ ((id)=>{
+	for(var i=0;i<mass_section.length;++i)
+if(mass_section[i].Id==id)
+return mass_section[i];
+})(mass_with_id[i]).Head+"</div>";
+	res+=test__(mass_with_id[i]);
 }
 
 res+="</div><div class='div_inside_articles'>";
