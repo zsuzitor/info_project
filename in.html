@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html><head>
 	<style type='text/css'>
 	input,
@@ -430,8 +431,10 @@ function test__(id){
 	//if(mass_with_id.length>0)
 	//	res+="<div></div>";
 
+
+
 for(var i=0;i<mass_with_id.length;++i){
-	res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+mass_with_id[i]+"'>"+ ((id)=>{
+	res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+mass_with_id[i]+"'>"+ (function(id){
 	for(var i=0;i<mass_section.length;++i)
 if(mass_section[i].Id==id)
 return mass_section[i];
