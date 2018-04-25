@@ -38,6 +38,20 @@
 		/*margin: 0;*/
 		position: relative;
 		/* box-sizing: border-box; */
+
+
+ 
+
+	background-color: #DDD7D7;
+background-size: 50px 50px;
+background-image: 
+linear-gradient(-45deg, transparent 52%, rgba(255,255,255,0.9) 54%, transparent 55%, transparent),
+linear-gradient(45deg, transparent 52%, rgba(255,255,255,0.6) 54%, transparent 55%, transparent),
+linear-gradient(-45deg, transparent 50%, rgba(0,0,0,0.1) 52%, transparent 53%, transparent),
+linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.05) 52%, transparent 53%, transparent);
+
+
+
 	}
 	/*---------------------------------------------------------------------------------------*/
 	div.main_div{
@@ -52,6 +66,8 @@
 		left: 0;
 		width: 100%;
 		z-index: 10;
+		/* background-color: #FFA07A; */
+		background-color: rgba(255, 160, 122, 0.5);
 	}
 	div.main_block_left{
 		width: 30%;
@@ -72,6 +88,14 @@
 		position: absolute;
 		overflow-x: auto;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+/* background-color: #DEE2E5;
+background-image: 
+linear-gradient(transparent 99px, white 99px), 
+linear-gradient(90deg, transparent 99px, white 99px), 
+linear-gradient(transparent 19px, rgba(255, 255, 255, 0.3) 19px), 
+linear-gradient(90deg, transparent 19px, rgba(255, 255, 255, 0.3) 19px);
+background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px; */
 	}
 	div.div_for_block{
 		margin-top: 100px;
@@ -86,6 +110,11 @@
 		top: 100px;
 		left: 0;
 		border: 1px solid black;
+		/* background-color: #DCDCDC; */
+		background-image: 
+linear-gradient(135deg, transparent 84px, #d95b43 84px, #d95b43 100px, #ecd078 100px, #ecd078 106px, #c02942 106px, #c02942 120px, #ecd078 121px, #ecd078 127px, #542437 127px, #542437 142px, #ecd078 142px, #ecd078 148px, #53777a 148px, #53777a 163px, #ecd078 163px, #ecd078 168px, #d95b43 169px), 
+linear-gradient(135deg, #d95b43 15px, #d95b43, #ecd078 15px, #ecd078 21px, #c02942 21px, #c02942 36px, #ecd078 36px, #ecd078 42px, #542437 42px, #542437 57.5px, #ecd078 57px, #ecd078 63px, #53777a 63px, #53777a 78px, #ecd078 78px, #ecd078 84px, transparent 84px, transparent 99px);
+background-size: 120px 120px;
 	}
 	div.div_search{
 		border: 1px solid black;
@@ -95,7 +124,9 @@
 		overflow: hidden;
 		white-space: nowrap;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
+		background-color: #FFFACD;
 	}
+	
 /* div.div_search:hover{
 	width: 300px;
 	} */
@@ -108,6 +139,7 @@
 		position: absolute;
 		transition: 1s;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
+		background-color: #FFFACD;
 	}
 	div.div_search_img{
 		width: 50px;
@@ -225,7 +257,7 @@
 		border: 2px solid black;
 		font-size: 50pt;
 		font-weight: 600;
-		background-color: blue;
+		background-color: #FA8072;
 		color: white;
 		overflow: hidden;
 		position: relative;
@@ -234,7 +266,7 @@
 	}
 	div.scroll_top_button:hover{
 		background-color: white;
-		color: blue;
+		color: #FA8072;
 		cursor: pointer;
 	}
 
@@ -256,7 +288,7 @@
 	div.div_one_section_name{
 		border: 1px solid black;
 		font-size: 25pt;
-		color: red;
+		/* color: red; */
 		cursor: pointer;
 		height: 40px;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -367,16 +399,20 @@
 после каждого действия (сохранния удаления сохранять это действие в json и в html)
 
 
-клик который открывает меню слева должен скрывать меню справа если меню слева уже открыто
+//клик который открывает меню слева должен скрывать меню справа если меню слева уже открыто
 блок настроек сейчас немного не симметрично расположен 1-2 пикселя
 кнопка для закрытия всех вкладок
 hidden_search_block мб не нужен и тот что рядом тоже
-старт при маленьком экране блок настроек налезает на блок с поиском
+//старт при маленьком экране блок настроек налезает на блок с поиском
 возможность редактирования выделенного объекта
 на стороне сервера или js если сохраняется код html то надо "<>" заменять на "&lt; и &gt;"   //При этом тег <p> будет выглядеть как &lt;p&gt;
 для прозрачных элементов background
 при наведении на кнопки делать их "выдавливание " тенью
-вынести в функцию перемещение центра настроек и цента блоков
+//вынести в функцию перемещение центра настроек и цента блоков
+И добавить трнугольники открывающиеся и закрывающиеся на блоки Как бы разворот
+При клике выделчть визуально и сохранять id блока
+при клике на пустую секцию(id4) открывается пустая подсекция которая тоже отображается пиклесей на 5
+проверить что бы везде были ;;;;
 
 
 +++++++
@@ -447,8 +483,8 @@ x_centre=centre;
 
 var left_div=document.getElementById("main_block_left_id");
 
-
-sett_block.style.left=(centre-sett_block.offsetWidth/2)+'px';//-sett_block.offsetWidth/2
+change_centre(centre);
+//sett_block.style.left=(centre-sett_block.offsetWidth/2)+'px';//-sett_block.offsetWidth/2
 if(sett_block.getBoundingClientRect().left<310){
 	move_search_div(450);
 }
@@ -458,10 +494,10 @@ else if(document.getElementById("div_search_id").getBoundingClientRect().right>5
 
 
 
-left_div.style.width=centre-left_line_div.offsetWidth-5+'px';
+//left_div.style.width=centre-left_line_div.offsetWidth-5+'px';
 left_div.style.display='block';
-right_div.style.left=centre-left_line_div.offsetWidth+5+'px';
-right_div.style.width=client_width-centre-5+'px';
+//right_div.style.left=centre-left_line_div.offsetWidth+5+'px';
+//right_div.style.width=client_width-centre-5+'px';
 
 //console.log(centre);
 
@@ -506,6 +542,13 @@ function page_first_start(){
 			left_top_button.style.marginTop = client_heigth/2+'px';
 
 
+if(setting_div.getBoundingClientRect().left<310){
+	move_search_div(450);
+}
+else if(document.getElementById("div_search_id").getBoundingClientRect().right>50){
+	move_search_div(0);
+}
+
 
 //
 function load_one_section(id){
@@ -536,11 +579,11 @@ function load_one_section(id){
 
 		for(var i=0;i<mass_article.length;++i){
 			if(mass_article[i].Section_id==id){
-				res+="<div>";
-				res+="<div onclick='load_article("+mass_article[i].Id+")'>"+mass_article[i].Head+"</div>";
+				//res+="<div>";
+				res+="<div id='div_one_article_name_"+mass_article[i].Id+"' onclick='load_article("+mass_article[i].Id+")'>"+mass_article[i].Head+"</div>";
 		//res+="<div>"+mass_article[i].Body+"</div>";
 
-		res+="</div>";
+		//res+="</div>";
 	}
 }
 
@@ -554,10 +597,23 @@ return res;
 			left_div.innerHTML="<div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'>"+'ALL'+"</div>"+str_res_for_left_ul;
 
 		}
-
+function select_view_line(new_click_id){
+if(new_click_id!=null&&new_click_id!=undefined){
+	var block_prev=document.getElementById(last_click_name);
+	var block_current=document.getElementById(new_click_id);
+	if(block_prev!=null){
+		block_prev.style.backgroundColor='';
+	}
+	if(block_current!=null){
+		block_current.style.backgroundColor='#F08080';
+		last_click_name=new_click_id;
+	}
+}
+}
 
 		function click_name_section(a){
-			last_click_name=a.id;
+			select_view_line(a.id);
+			//last_click_name=a.id;
 			var num_id=a.id.split('_')[4];
 			var div=document.getElementById("div_one_section_inside_"+num_id);
 			//var div_2=document.getElementById("div_one_section_inside_inside_"+num_id);
@@ -577,7 +633,8 @@ return res;
 
 		function load_article(id_ar){
 			var acticle=null;
-			last_click_name=id_ar;
+			select_view_line('div_one_article_name_'+id_ar);
+			//last_click_name=id_ar;
 			for(var i=0;i<mass_article.length;++i)
 				if(mass_article[i].Id==id_ar){
 					acticle=mass_article[i];
@@ -731,6 +788,17 @@ function click_on_centre_settings(flag){
 
 function add_section(){
 //div_for_adds_info_id
+//last_click_name
+
+
+
+
+
+
+
+
+
+
 }
 
 function add_article(){
