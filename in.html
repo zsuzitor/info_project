@@ -37,6 +37,7 @@
 	body{
 		/*margin: 0;*/
 		position: relative;
+		/* box-sizing: border-box; */
 	}
 	/*---------------------------------------------------------------------------------------*/
 	div.main_div{
@@ -59,7 +60,7 @@
 		overflow: hidden;
 		transition: 1s;
 		position: absolute;
-		overflow-x: auto;
+		overflow-x: scroll;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	}
 	div.main_block_right{
@@ -259,6 +260,8 @@
 		cursor: pointer;
 		height: 40px;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
+		white-space:nowrap;
+
 	}
 
 	div.div_inside_articles{
@@ -287,39 +290,47 @@
 	
 	.lupa:after{width:7px; background:#333; transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg); top:17px; left:24px;}
 
-span.home {
-    height: 0px;
-    width: 0px;
-    border-width: 16px;
-    border-style: solid;
-    border-color: transparent transparent #333 transparent;
-    position: absolute;
-    top: -8px;
-    left: 8px;
- 
-}
- 
-span.home:after {
-    content: '';
-    width: 5px;
-    height: 16px;
-    background-color: transparent;
-    position: absolute;
-    top: 16px;
-    right: -11px;
-    border-left: 8px solid #333;
-    border-right: 8px solid #333;
-}
- 
-span.home:before {
-    content: '';
-    width: 9px;
-    height: 6px;
-    background-color: #333;
-    position: absolute;
-    top: 16px;
-    right: -5px;
-}
+	span.home {
+		height: 0px;
+		width: 0px;
+		border-width: 16px;
+		border-style: solid;
+		border-color: transparent transparent #333 transparent;
+		position: absolute;
+		top: -8px;
+		left: 8px;
+
+	}
+
+	span.home:after {
+		content: '';
+		width: 5px;
+		height: 16px;
+		background-color: transparent;
+		position: absolute;
+		top: 16px;
+		right: -11px;
+		border-left: 8px solid #333;
+		border-right: 8px solid #333;
+	}
+
+	span.home:before {
+		content: '';
+		width: 9px;
+		height: 6px;
+		background-color: #333;
+		position: absolute;
+		top: 16px;
+		right: -5px;
+	}
+	div.div_one_section_inside_cl{
+		min-width: 100%;
+	}
+
+/* div.div_one_section_inside_inside{
+	overflow: hidden;
+	transition: 1s;
+	} */
 
 
 
@@ -340,20 +351,22 @@ span.home:before {
 
 //колонку слева высоту ей задавать js
 //линия в блоке сверху сделать что бы ей можно было менять рамеры divов
-слева человеческий список сделать
+//слева человеческий список сделать
 реальзация поиска
 кнопка круглая будет именно кнопкой для поиска
-добавить тени и css
+//добавить тени и css
 //TODO прикрутить это что бы при клики правой и зажатой левой возвращалось назад и корды хранить в объекте 
-+проверить добавить скролл по х для блоков
+//+проверить добавить скролл по х для блоков
 хранить последнеий нажатый блок
-+проверить document.onmousemove   проверки на выход за границы
+//+проверить document.onmousemove   проверки на выход за границы
 ширину divов левого и правого задавать из js а не css
-при перемещении блока настроек переносить блок с поиском
+//при перемещении блока настроек переносить блок с поиском
 добавить резервное копирование и спрашивать о том нужно ли сохранение(мб просто кнопку в меню сверху)
 при удалении внешнего блока удалять все в нем но не его
-передавать в шарпа в json строке всю инфу которая нужна
+передавать в шарп в json строке всю инфу которая нужна
 после каждого действия (сохранния удаления сохранять это действие в json и в html)
+
+
 клик который открывает меню слева должен скрывать меню справа если меню слева уже открыто
 блок настроек сейчас немного не симметрично расположен 1-2 пикселя
 кнопка для закрытия всех вкладок
@@ -362,7 +375,8 @@ hidden_search_block мб не нужен и тот что рядом тоже
 возможность редактирования выделенного объекта
 на стороне сервера или js если сохраняется код html то надо "<>" заменять на "&lt; и &gt;"   //При этом тег <p> будет выглядеть как &lt;p&gt;
 для прозрачных элементов background
-
+при наведении на кнопки делать их "выдавливание " тенью
+вынести в функцию перемещение центра настроек и цента блоков
 
 
 +++++++
@@ -380,6 +394,7 @@ hidden_search_block мб не нужен и тот что рядом тоже
 
 		var mass_section=null;
 		var mass_article=null;
+		var last_click_name=null;
 
 
 	//change_x_centre_object.coords=null;
@@ -494,7 +509,9 @@ function page_first_start(){
 
 //
 function load_one_section(id){
-	var res="<div style='display:none;' id='div_one_section_inside_"+id+"'><div class='div_inside_sections'>";
+	// style='height:0;' для div_one_section_inside_inside_ если пытаться сделлать плавное открывание и раскомментить css div.div_one_section_inside_inside
+	var res="<div style='display:none;' class='div_one_section_inside_cl' id='div_one_section_inside_"+id+"'><div class='div_one_section_inside_inside' id='div_one_section_inside_inside_"+id+"'>\
+	<div class='div_inside_sections'>";
 
 	var mass_with_id=[];
 	for(var i=0;i<mass_section.length;++i){
@@ -527,31 +544,40 @@ function load_one_section(id){
 	}
 }
 
-res+="</div></div>";
+res+="</div></div></div>";
 return res;
 }
 			//-------------------------
 			mass_section=JSON.parse(document.getElementById("string_base_info_sections").value);
 			mass_article=JSON.parse(document.getElementById("string_base_info_articles").value);
 			var str_res_for_left_ul=load_one_section(1);
-			left_div.innerHTML="<div class=''><div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'>"+'ALL'+"</div>"+str_res_for_left_ul+"</div>";
+			left_div.innerHTML="<div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'>"+'ALL'+"</div>"+str_res_for_left_ul;
 
 		}
 
 
 		function click_name_section(a){
-			var div=document.getElementById("div_one_section_inside_"+a.id.split('_')[4]);
-			if(div.style.display==''||div.style.display=='block')
+			last_click_name=a.id;
+			var num_id=a.id.split('_')[4];
+			var div=document.getElementById("div_one_section_inside_"+num_id);
+			//var div_2=document.getElementById("div_one_section_inside_inside_"+num_id);
+			if(div.style.display==''||div.style.display=='inline-block'){
+
 				div.style.display='none';
-			else
-				div.style.display='block';
+				//div_2.style.height='0';
+			}
+			
+			else{
+				//div_2.style.height='300px';
+				div.style.display='inline-block';
+			}
 			
 		}
 
 
 		function load_article(id_ar){
 			var acticle=null;
-
+			last_click_name=id_ar;
 			for(var i=0;i<mass_article.length;++i)
 				if(mass_article[i].Id==id_ar){
 					acticle=mass_article[i];
@@ -594,30 +620,74 @@ return res;
 			function show_left_menu(){
 				var left_div=document.getElementById("main_block_left_id");
 				var setting_div=document.getElementById("div_settings_block_id");
-				var right_div=document.getElementById("main_block_right_id");
-				var left_line_div=document.getElementById("div_left_column_id");
-				right_div.style.width = '';
-				left_div.style.display = 'block';
-right_div.style.left =left_div.offsetWidth+5+'px';//left_line_div.offsetWidth
-var top_setings=document.getElementById("div_settings_block_id");
-top_setings.style.left=x_centre-(setting_div.offsetWidth/2)+'px';
+				//var right_div=document.getElementById("main_block_right_id");
+				//var left_line_div=document.getElementById("div_left_column_id");
+				if(left_div.style.display == 'none'){
+left_div.style.display = 'block';
+change_centre(x_centre);
+// 				right_div.style.width = '';
+// 				left_div.style.width=x_centre-left_line_div.offsetWidth+'px';
+// 				l
+// right_div.style.left =left_div.offsetWidth+5+'px';//left_line_div.offsetWidth
+
+// setting_div.style.left=x_centre-left_line_div.offsetWidth+5+'px';//setting_div.offsetWidth/2
 
 move_search_div(0);
-
+}
+else{
+change_centre(client_width-setting_div.offsetWidth/2);
+}
 }
 
+//----------------------
+//-----------------lh----
+function change_centre(coord){//координата от левого края  //change_var   
+var left_div=document.getElementById("main_block_left_id");
+				var setting_div=document.getElementById("div_settings_block_id");
+				var right_div=document.getElementById("main_block_right_id");
+				var left_line_div=document.getElementById("div_left_column_id");
+
+
+setting_div.style.left=coord-setting_div.offsetWidth/2+'px';
+left_div.style.width=coord-left_line_div.offsetWidth-3+'px';//setting_div.getBoundingClientRect().left+
+//alert(client_width-setting_div.style.left.split('px')[0]);
+right_div.style.width=client_width-coord-6+'px';//(client_width-setting_div.style.left.split('px')[0])
+right_div.style.left=coord-left_line_div.offsetWidth+3+'px';//setting_div.style.left.split('px')[0]+
+
+}
 
 function hidden_left_menu(){
 	var left_div=document.getElementById("main_block_left_id");
 
 	var right_div=document.getElementById("main_block_right_id");
 	var left_line_div=document.getElementById("div_left_column_id");
-	right_div.style.width = (client_width-left_line_div.offsetWidth)+'px';
-right_div.style.left =0;//left_line_div.offsetWidth
-var top_setings=document.getElementById("div_settings_block_id");
-top_setings.style.left=left_line_div.offsetWidth-(top_setings.offsetWidth/2)+'px';
+	var setting_div=document.getElementById("div_settings_block_id");
+	if(left_div.style.display=='block'||left_div.style.display==''){
+// 		right_div.style.width = (client_width-left_line_div.offsetWidth)+'px';
+// right_div.style.left =0;//left_line_div.offsetWidth
+
+// setting_div.style.left=left_line_div.offsetWidth-(setting_div.offsetWidth/2)+'px';
+if(setting_div.getBoundingClientRect().left<x_centre){//left_line_div.offsetWidth+
+change_centre(left_line_div.offsetWidth);
 left_div.style.display = 'none';
 move_search_div(300);
+}
+else{
+change_centre(x_centre);
+if(setting_div<310)
+move_search_div(450);
+	}
+}
+	
+//change_centre(left_line_div.offsetWidth);
+// setting_div.style.left=client_width-setting_div.offsetWidth+'px';
+// left_div.style.width=client_width-setting_div.offsetWidth/2-left_line_div.offsetWidth+'px';//setting_div.getBoundingClientRect().left+
+
+// right_div.style.width=(client_width-setting_div.style.left.split('px')[0])+'px';
+// right_div.style.left=client_width-left_line_div.offsetWidth-setting_div.offsetWidth/2+5+'px';//setting_div.style.left.split('px')[0]+
+
+	
+	
 }
 
 
@@ -698,7 +768,7 @@ function move_search_div(marginleft){
 		{
 			"Id": 3,
 			"Parrent_id": 1,
-			"Head": "id3"
+			"Head": "id3-----------3------------3---------3"
 		},
 		{
 			"Id": 4,
