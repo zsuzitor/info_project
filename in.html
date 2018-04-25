@@ -40,15 +40,15 @@
 		/* box-sizing: border-box; */
 
 
- 
 
-	background-color: #DDD7D7;
-background-size: 50px 50px;
-background-image: 
-linear-gradient(-45deg, transparent 52%, rgba(255,255,255,0.9) 54%, transparent 55%, transparent),
-linear-gradient(45deg, transparent 52%, rgba(255,255,255,0.6) 54%, transparent 55%, transparent),
-linear-gradient(-45deg, transparent 50%, rgba(0,0,0,0.1) 52%, transparent 53%, transparent),
-linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.05) 52%, transparent 53%, transparent);
+
+		background-color: #DDD7D7;
+		background-size: 50px 50px;
+		background-image: 
+		linear-gradient(-45deg, transparent 52%, rgba(255,255,255,0.9) 54%, transparent 55%, transparent),
+		linear-gradient(45deg, transparent 52%, rgba(255,255,255,0.6) 54%, transparent 55%, transparent),
+		linear-gradient(-45deg, transparent 50%, rgba(0,0,0,0.1) 52%, transparent 53%, transparent),
+		linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.05) 52%, transparent 53%, transparent);
 
 
 
@@ -78,6 +78,7 @@ linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.05) 52%, transparent 53%, t
 		position: absolute;
 		overflow-x: scroll;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
+		background-color:  rgba(255, 255, 255,0.5);
 	}
 	div.main_block_right{
 		width: 68%;
@@ -88,6 +89,9 @@ linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.05) 52%, transparent 53%, t
 		position: absolute;
 		overflow-x: auto;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
+		/* background-color:  rgba(128, 128, 128,0.5); */
+		background-color:  rgba(255, 255, 255,0.5);
+		
 
 /* background-color: #DEE2E5;
 background-image: 
@@ -96,37 +100,41 @@ linear-gradient(90deg, transparent 99px, white 99px),
 linear-gradient(transparent 19px, rgba(255, 255, 255, 0.3) 19px), 
 linear-gradient(90deg, transparent 19px, rgba(255, 255, 255, 0.3) 19px);
 background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px; */
-	}
-	div.div_for_block{
-		margin-top: 100px;
-		margin-left: 50px;
-		position: relative;
-		/*min-width: 600px;*/
-	}
-	div.div_left_column{
-		width: 55px;
-		box-shadow: 0 0 10px rgba(0,0,0,0.5);
-		position: fixed;
-		top: 100px;
-		left: 0;
+}
+div.div_for_block{
+	margin-top: 100px;
+	margin-left: 50px;
+	position: relative;
+	/*min-width: 600px;*/
+}
+div.div_left_column{
+	width: 55px;
+
+	position: fixed;
+	top: 100px;
+	left: 0;
+
+	/* background-color: #DCDCDC; */
+/* box-shadow: 0 0 10px rgba(0,0,0,0.5);
 		border: 1px solid black;
-		/* background-color: #DCDCDC; */
 		background-image: 
 linear-gradient(135deg, transparent 84px, #d95b43 84px, #d95b43 100px, #ecd078 100px, #ecd078 106px, #c02942 106px, #c02942 120px, #ecd078 121px, #ecd078 127px, #542437 127px, #542437 142px, #ecd078 142px, #ecd078 148px, #53777a 148px, #53777a 163px, #ecd078 163px, #ecd078 168px, #d95b43 169px), 
 linear-gradient(135deg, #d95b43 15px, #d95b43, #ecd078 15px, #ecd078 21px, #c02942 21px, #c02942 36px, #ecd078 36px, #ecd078 42px, #542437 42px, #542437 57.5px, #ecd078 57px, #ecd078 63px, #53777a 63px, #53777a 78px, #ecd078 78px, #ecd078 84px, transparent 84px, transparent 99px);
-background-size: 120px 120px;
-	}
-	div.div_search{
-		border: 1px solid black;
-		width: 55px;
-		height: 100%;
-		transition: 1s;
-		overflow: hidden;
-		white-space: nowrap;
-		box-shadow: 0 0 10px rgba(0,0,0,0.5);
-		background-color: #FFFACD;
-	}
-	
+background-size: 120px 120px; */
+
+
+}
+div.div_search{
+	border: 1px solid black;
+	width: 55px;
+	height: 100%;
+	transition: 1s;
+	overflow: hidden;
+	white-space: nowrap;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	background-color: #FFFACD;
+}
+
 /* div.div_search:hover{
 	width: 300px;
 	} */
@@ -357,6 +365,7 @@ background-size: 120px 120px;
 	}
 	div.div_one_section_inside_cl{
 		min-width: 100%;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	}
 
 /* div.div_one_section_inside_inside{
@@ -413,8 +422,20 @@ hidden_search_block мб не нужен и тот что рядом тоже
 При клике выделчть визуально и сохранять id блока
 при клике на пустую секцию(id4) открывается пустая подсекция которая тоже отображается пиклесей на 5
 проверить что бы везде были ;;;;
+подумать над внутренними тенями особенно на кнопки и сделать кнопки как то красивее и "активнее"
+после того как распарсил по массивам можно удалять <div class="div_for_base_info" id="div_for_base_info_id">
+add_section_form починить
 
 
+
+// вроде ++
+функция для получения записи из массива по id написать и заменить 
+for(var i=0;i<mass_section.length;++i)
+				if(mass_section[i].Id==id)
+					return mass_section[i];
+
+
+//
 +++++++
 слева в строке кнопку для подъема наверх
 
@@ -542,19 +563,19 @@ function page_first_start(){
 			left_top_button.style.marginTop = client_heigth/2+'px';
 
 
-if(setting_div.getBoundingClientRect().left<310){
-	move_search_div(450);
-}
-else if(document.getElementById("div_search_id").getBoundingClientRect().right>50){
-	move_search_div(0);
-}
+			if(setting_div.getBoundingClientRect().left<310){
+				move_search_div(450);
+			}
+			else if(document.getElementById("div_search_id").getBoundingClientRect().right>50){
+				move_search_div(0);
+			}
 
 
 //
 function load_one_section(id){
 	// style='height:0;' для div_one_section_inside_inside_ если пытаться сделлать плавное открывание и раскомментить css div.div_one_section_inside_inside
 	var res="<div style='display:none;' class='div_one_section_inside_cl' id='div_one_section_inside_"+id+"'><div class='div_one_section_inside_inside' id='div_one_section_inside_inside_"+id+"'>\
-	<div class='div_inside_sections'>";
+	<div class='div_inside_sections' id='div_inside_sections_"+id+"'>";
 
 	var mass_with_id=[];
 	for(var i=0;i<mass_section.length;++i){
@@ -567,18 +588,14 @@ function load_one_section(id){
 
 
 	for(var i=0;i<mass_with_id.length;++i){
-		res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+mass_with_id[i]+"'>"+ (function(id){
-			for(var i=0;i<mass_section.length;++i)
-				if(mass_section[i].Id==id)
-					return mass_section[i];
-			})(mass_with_id[i]).Head+"</div>";
-			res+=load_one_section(mass_with_id[i]);
-		}
+		res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+mass_with_id[i]+"'>"+ find_in_mass(mass_with_id[i],1).Head+"</div>";
+		res+=load_one_section(mass_with_id[i]);
+	}
 
-		res+="</div><div class='div_inside_articles'>";
+	res+="</div><div class='div_inside_articles' id='div_inside_articles_"+id+"'>";
 
-		for(var i=0;i<mass_article.length;++i){
-			if(mass_article[i].Section_id==id){
+	for(var i=0;i<mass_article.length;++i){
+		if(mass_article[i].Section_id==id){
 				//res+="<div>";
 				res+="<div id='div_one_article_name_"+mass_article[i].Id+"' onclick='load_article("+mass_article[i].Id+")'>"+mass_article[i].Head+"</div>";
 		//res+="<div>"+mass_article[i].Body+"</div>";
@@ -597,19 +614,37 @@ return res;
 			left_div.innerHTML="<div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'>"+'ALL'+"</div>"+str_res_for_left_ul;
 
 		}
-function select_view_line(new_click_id){
-if(new_click_id!=null&&new_click_id!=undefined){
-	var block_prev=document.getElementById(last_click_name);
-	var block_current=document.getElementById(new_click_id);
-	if(block_prev!=null){
-		block_prev.style.backgroundColor='';
-	}
-	if(block_current!=null){
-		block_current.style.backgroundColor='#F08080';
-		last_click_name=new_click_id;
-	}
-}
-}
+
+
+function find_in_mass(id,type_mass){//1--секция 2--артикл
+
+	if(type_mass==1){
+		for(var i=0;i<mass_section.length;++i)
+			if(mass_section[i].Id==id)
+				return mass_section[i];
+			
+		}
+		else if(type_mass==2){
+			for(var i=0;i<mass_article.length;++i)
+				if(mass_section[i].Id==id)
+					return mass_section[i];
+			}
+		}
+
+
+		function select_view_line(new_click_id){
+			if(new_click_id!=null&&new_click_id!=undefined){
+				var block_prev=document.getElementById(last_click_name);
+				var block_current=document.getElementById(new_click_id);
+				if(block_prev!=null){
+					block_prev.style.backgroundColor='';
+				}
+				if(block_current!=null){
+					block_current.style.backgroundColor='#F08080';
+					last_click_name=new_click_id;
+				}
+			}
+		}
 
 		function click_name_section(a){
 			select_view_line(a.id);
@@ -680,8 +715,8 @@ if(new_click_id!=null&&new_click_id!=undefined){
 				//var right_div=document.getElementById("main_block_right_id");
 				//var left_line_div=document.getElementById("div_left_column_id");
 				if(left_div.style.display == 'none'){
-left_div.style.display = 'block';
-change_centre(x_centre);
+					left_div.style.display = 'block';
+					change_centre(x_centre);
 // 				right_div.style.width = '';
 // 				left_div.style.width=x_centre-left_line_div.offsetWidth+'px';
 // 				l
@@ -692,20 +727,20 @@ change_centre(x_centre);
 move_search_div(0);
 }
 else{
-change_centre(client_width-setting_div.offsetWidth/2);
+	change_centre(client_width-setting_div.offsetWidth/2);
 }
 }
 
 //----------------------
 //-----------------lh----
 function change_centre(coord){//координата от левого края  //change_var   
-var left_div=document.getElementById("main_block_left_id");
-				var setting_div=document.getElementById("div_settings_block_id");
-				var right_div=document.getElementById("main_block_right_id");
-				var left_line_div=document.getElementById("div_left_column_id");
+	var left_div=document.getElementById("main_block_left_id");
+	var setting_div=document.getElementById("div_settings_block_id");
+	var right_div=document.getElementById("main_block_right_id");
+	var left_line_div=document.getElementById("div_left_column_id");
 
 
-setting_div.style.left=coord-setting_div.offsetWidth/2+'px';
+	setting_div.style.left=coord-setting_div.offsetWidth/2+'px';
 left_div.style.width=coord-left_line_div.offsetWidth-3+'px';//setting_div.getBoundingClientRect().left+
 //alert(client_width-setting_div.style.left.split('px')[0]);
 right_div.style.width=client_width-coord-6+'px';//(client_width-setting_div.style.left.split('px')[0])
@@ -725,17 +760,17 @@ function hidden_left_menu(){
 
 // setting_div.style.left=left_line_div.offsetWidth-(setting_div.offsetWidth/2)+'px';
 if(setting_div.getBoundingClientRect().left<x_centre){//left_line_div.offsetWidth+
-change_centre(left_line_div.offsetWidth);
-left_div.style.display = 'none';
-move_search_div(300);
+	change_centre(left_line_div.offsetWidth);
+	left_div.style.display = 'none';
+	move_search_div(300);
 }
 else{
-change_centre(x_centre);
-if(setting_div<310)
-move_search_div(450);
-	}
+	change_centre(x_centre);
+	if(setting_div<310)
+		move_search_div(450);
 }
-	
+}
+
 //change_centre(left_line_div.offsetWidth);
 // setting_div.style.left=client_width-setting_div.offsetWidth+'px';
 // left_div.style.width=client_width-setting_div.offsetWidth/2-left_line_div.offsetWidth+'px';//setting_div.getBoundingClientRect().left+
@@ -743,8 +778,8 @@ move_search_div(450);
 // right_div.style.width=(client_width-setting_div.style.left.split('px')[0])+'px';
 // right_div.style.left=client_width-left_line_div.offsetWidth-setting_div.offsetWidth/2+5+'px';//setting_div.style.left.split('px')[0]+
 
-	
-	
+
+
 }
 
 
@@ -790,9 +825,47 @@ function add_section(){
 //div_for_adds_info_id
 //last_click_name
 
+if(last_click_name.indexOf('div_one_section_name_')<0)
+	alert('выберите секцию');
+else{
+	var right_div=document.getElementById("main_block_right_id");
+	var res='<div>';
+	res+='<input type="text" id="input_for_section_name">';
+	res+='<button onclick="add_section_form">Добавить</button>';
+	res+='</div>';
+	right_div.innerHTML=res;
+}
+
+
+}
+function add_section_form(){
+//mass_section
+var right_div=document.getElementById("main_block_right_id");
+var sect_name_input=document.getElementById("input_for_section_name");
+var div_save=document.getElementById("div_for_change_info_id");
+var obj={};
+
+obj.Parrent_id=last_click_name.split('_')[4];
+obj.Head=sect_name_input.value;
+obj.Id=find_maximum_id(mass_section);
+var inside_sect=document.getElementById("div_inside_sections_"+obj.Parrent_id);
+mass_section.push(obj);
+//TODO занести в html и обновить инфу в списке
+var res="";
+
+for(var num=0;document.getElementById('save_adds_section_id_'+num)!=null;++num)
+
+	res+="<input id='save_adds_section_id_"+num+"' type='hidden' value='"+obj.Id+"'>";
+res+="<input id='save_adds_section_parrent_id_"+num+"' type='hidden' value='"+obj.Parrent_id+"'>";
+res+="<input id='save_adds_section_head_"+num+"' type='hidden' value='"+obj.Head+"'>";
+div_save.innerHTML+=res;
+var tmp="";
 
 
 
+tmp+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+obj.Id+"'>"+ find_in_mass(obj.Id,1).Head+"</div>";
+tmp+=load_one_section(obj.Id);
+inside_sect.innerHTML+=tmp;
 
 
 
@@ -800,14 +873,22 @@ function add_section(){
 
 
 }
+function find_maximum_id(mass){
+	var max=null;
+	for(var i=0;i<mass.length;++i)
+		if(max==null||max<mass[i].Id)
+			max=mass[i].Id;
+		return max;
+		
+	}
 
-function add_article(){
+	function add_article(){
 
-}
+	}
 
-function dell_select(){
+	function dell_select(){
 
-}
+	}
 // function click_up_on_centre_settings(){
 
 // }
@@ -817,11 +898,13 @@ function move_search_div(marginleft){
 }
 </script>
 </head><body>
-	<div class="div_for_change_info" id="div_for_change_info_id"></div>
+	<div class="div_for_change_info" id="div_for_change_info_id">
+		
+	</div>
 	<div class="div_for_base_info" id="div_for_base_info_id">
-		<div id="one_section_base_id_1"></div>
+		<!-- <div id="one_section_base_id_1"></div>
 		<div id="one_section_base_id_2"></div>
-		<div id="one_section_base_id_3"></div>
+		<div id="one_section_base_id_3"></div> -->
 		<input type="hidden" id="string_base_info_sections" value='[
 		{
 			"Id": 1,
@@ -889,12 +972,13 @@ function move_search_div(marginleft){
 
 
 	</div>
+
 	<div class="main_div">
 		<div class="main_top_div">
 			<div class="div_for_top_menu" id="div_for_top_menu_id">
-				<div class="div_inline_block top_menu_button top_menu_add_section" onclick='add_section()'></div>
-				<div class="div_inline_block top_menu_button top_menu_add_article" onclick='add_article()'></div>
-				<div class="div_inline_block top_menu_button top_menu_dell_select" onclick='dell_select()'></div>
+				<div class="div_inline_block top_menu_button top_menu_add_section" title="добавить секцию" onclick='add_section()'></div>
+				<div class="div_inline_block top_menu_button top_menu_add_article"  title="добавить статью" onclick='add_article()'></div>
+				<div class="div_inline_block top_menu_button top_menu_dell_select"   title="удалить выбранное" onclick='dell_select()'></div>
 				<div class="div_inline_block top_menu_button top_menu_home_button" onclick=''><span class="home"></span></div>
 			</div>
 			<div class="div_inline_block div_search" id="div_search_id" onmouseout='hidden_search_block()' onmouseover='show_search_block()'>
