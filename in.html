@@ -368,6 +368,10 @@ div.div_search{
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	}
 
+	div.div_one_article_name{
+		border-bottom: 1px solid black;
+	}
+
 /* div.div_one_section_inside_inside{
 	overflow: hidden;
 	transition: 1s;
@@ -424,7 +428,7 @@ hidden_search_block мб не нужен и тот что рядом тоже
 проверить что бы везде были ;;;;
 подумать над внутренними тенями особенно на кнопки и сделать кнопки как то красивее и "активнее"
 после того как распарсил по массивам можно удалять <div class="div_for_base_info" id="div_for_base_info_id">
-add_section_form починить
+//add_section_form починить
 
 
 
@@ -455,8 +459,12 @@ for(var i=0;i<mass_section.length;++i)
 
 
 	//change_x_centre_object.coords=null;
-
-	document.addEventListener("DOMContentLoaded", page_first_start);
+	if (document.addEventListener){
+		document.addEventListener("DOMContentLoaded", page_first_start);
+	} else if (document.attachEvent){
+		document.attachEvent('DOMContentLoaded', page_first_start);
+	}
+	//document.addEventListener("DOMContentLoaded", page_first_start);
 
 	document.onmouseup=function(e) {
 		click_on_centre_settings(false);
@@ -572,7 +580,18 @@ function page_first_start(){
 
 
 //
-function load_one_section(id){
+
+			//-------------------------
+			mass_section=JSON.parse(document.getElementById("string_base_info_sections").value);
+			mass_article=JSON.parse(document.getElementById("string_base_info_articles").value);
+			var str_res_for_left_ul=load_one_section(1);
+			left_div.innerHTML="<div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'>"+'ALL'+"</div>"+str_res_for_left_ul;
+
+		}
+
+
+
+		function load_one_section(id){
 	// style='height:0;' для div_one_section_inside_inside_ если пытаться сделлать плавное открывание и раскомментить css div.div_one_section_inside_inside
 	var res="<div style='display:none;' class='div_one_section_inside_cl' id='div_one_section_inside_"+id+"'><div class='div_one_section_inside_inside' id='div_one_section_inside_inside_"+id+"'>\
 	<div class='div_inside_sections' id='div_inside_sections_"+id+"'>";
@@ -597,7 +616,7 @@ function load_one_section(id){
 	for(var i=0;i<mass_article.length;++i){
 		if(mass_article[i].Section_id==id){
 				//res+="<div>";
-				res+="<div id='div_one_article_name_"+mass_article[i].Id+"' onclick='load_article("+mass_article[i].Id+")'>"+mass_article[i].Head+"</div>";
+				res+="<div class='div_one_article_name' id='div_one_article_name_"+mass_article[i].Id+"' onclick='load_article("+mass_article[i].Id+")'>"+mass_article[i].Head+"</div>";
 		//res+="<div>"+mass_article[i].Body+"</div>";
 
 		//res+="</div>";
@@ -607,13 +626,12 @@ function load_one_section(id){
 res+="</div></div></div>";
 return res;
 }
-			//-------------------------
-			mass_section=JSON.parse(document.getElementById("string_base_info_sections").value);
-			mass_article=JSON.parse(document.getElementById("string_base_info_articles").value);
-			var str_res_for_left_ul=load_one_section(1);
-			left_div.innerHTML="<div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'>"+'ALL'+"</div>"+str_res_for_left_ul;
 
-		}
+
+
+
+
+
 
 
 function find_in_mass(id,type_mass){//1--секция 2--артикл
@@ -824,17 +842,19 @@ function click_on_centre_settings(flag){
 function add_section(){
 //div_for_adds_info_id
 //last_click_name
-
-if(last_click_name.indexOf('div_one_section_name_')<0)
-	alert('выберите секцию');
-else{
-	var right_div=document.getElementById("main_block_right_id");
-	var res='<div>';
-	res+='<input type="text" id="input_for_section_name">';
-	res+='<button onclick="add_section_form">Добавить</button>';
-	res+='</div>';
-	right_div.innerHTML=res;
-}
+if(last_click_name!=null)
+	if(last_click_name.indexOf('div_one_section_name_')<0)
+		alert('выберите секцию');
+	else{
+		var right_div=document.getElementById("main_block_right_id");
+		var res='<div>';
+		res+='<input type="text" id="input_for_section_name">';
+		res+='<button onclick="add_section_form()">Добавить раздел</button>';
+		res+='</div>';
+		right_div.innerHTML=res;
+	}
+	else
+		alert('выберите секцию');
 
 
 }
@@ -844,16 +864,16 @@ var right_div=document.getElementById("main_block_right_id");
 var sect_name_input=document.getElementById("input_for_section_name");
 var div_save=document.getElementById("div_for_change_info_id");
 var obj={};
-
+obj.Id=+find_maximum_id(mass_section) +1;
 obj.Parrent_id=last_click_name.split('_')[4];
 obj.Head=sect_name_input.value;
-obj.Id=find_maximum_id(mass_section);
+
 var inside_sect=document.getElementById("div_inside_sections_"+obj.Parrent_id);
 mass_section.push(obj);
 //TODO занести в html и обновить инфу в списке
 var res="";
 
-for(var num=0;document.getElementById('save_adds_section_id_'+num)!=null;++num)
+for(var num=0;document.getElementById('save_adds_section_id_'+num)!=null;++num);
 
 	res+="<input id='save_adds_section_id_"+num+"' type='hidden' value='"+obj.Id+"'>";
 res+="<input id='save_adds_section_parrent_id_"+num+"' type='hidden' value='"+obj.Parrent_id+"'>";
@@ -883,12 +903,146 @@ function find_maximum_id(mass){
 	}
 
 	function add_article(){
+		if(last_click_name!=null)
+			if(last_click_name.indexOf('div_one_section_name_')<0)
+				alert('выберите секцию');
+			else{
+				var right_div=document.getElementById("main_block_right_id");
+				var res='<div>';
+				res+='<input type="text" id="input_for_article_head">';
+				res+='<input type="text" id="input_for_article_body">';
+				res+='<button onclick="add_article_form()">Добавить статью</button>';
+				res+='</div>';
+				right_div.innerHTML=res;
+			}
+			else
+				alert('выберите секцию');
 
+		}
+		function add_article_form(){
+			var right_div=document.getElementById("main_block_right_id");
+			var sect_name_input=document.getElementById("input_for_article_head");
+			var sect_body_input=document.getElementById("input_for_article_body");
+			var div_save=document.getElementById("div_for_change_info_id");
+			var obj={};
+			obj.Id=+find_maximum_id(mass_section) +1;
+			obj.Section_id=last_click_name.split('_')[4];
+			obj.Head=sect_name_input.value;
+			obj.Body=sect_body_input.value;
+
+			var inside_sect=document.getElementById("div_inside_articles_"+obj.Section_id);
+			mass_article.push(obj);
+//TODO занести в html и обновить инфу в списке
+var res="";
+
+for(var num=0;document.getElementById('save_adds_article_'+num)!=null;++num);
+
+	res+="<input id='save_adds_article_id_"+num+"' type='hidden' value='"+obj.Id+"'>";
+res+="<input id='save_adds_article_section_id_"+num+"' type='hidden' value='"+obj.Section_id+"'>";
+res+="<input id='save_adds_article_head_"+num+"' type='hidden' value='"+obj.Head+"'>";
+res+="<input id='save_adds_article_body_"+num+"' type='hidden' value='"+obj.Body+"'>";
+div_save.innerHTML+=res;
+var tmp="";
+
+tmp+="<div class='div_one_article_name' id='div_one_article_name_"+obj.Id+"' onclick='load_article("+obj.Id+")'>"+obj.Head+"</div>";
+
+inside_sect.innerHTML+=tmp;
+
+}
+
+function dell_select(){
+
+
+	function find_child_section(id){
+		var res='';
+
+		for(var i=0;i<mass_section.length;++i){
+			if(mass_section[i].Parrent_id==id){
+				res+=mass_section[i].Id;
+				res+="_"+find_child_section(mass_section[i].Id);
+			}
+		}
+
+
+		return res;
 	}
 
-	function dell_select(){
+
+
+	var id=last_click_name.split('_')[4];
+	if(last_click_name==null){
+		alert("выберите что то для удаления");
+		return;
+	}
+
+
+	if(last_click_name.indexOf("div_one_section_name")>=0){
+		for(var num=0;document.getElementById('save_delete_section_'+num)!=null;++num);
+			var tmp_bl=null;
+		var mass_sect_del=find_child_section(id).split('_');
+		for(var i=0;i<mass_sect_del.length;++i){
+			if(mass_sect_del[i]!=''){
+				for(var i2=0;i2<mass_article.length;++i2)
+					if(mass_article[i2].Section_id==mass_sect_del[i])
+						delete_article_f(mass_article[i2].Id);
+
+
+					delete_section_f(mass_sect_del[i]);
+
+				}
+			}
+
+
+			delete_section_f(id);
+		}
+		else if(last_click_name.indexOf("div_one_article_name")>=0){
+
+			delete_article_f(id);
+		}
+
+
 
 	}
+	function delete_section_f(id){
+		var div_save=document.getElementById("div_for_change_info_id");
+		var div=document.getElementById("div_one_section_name_"+id);
+		var div_in=document.getElementById("div_one_section_inside_"+id);
+		var div_in=document.getElementById("div_one_section_inside_"+id);
+//div_inside_articles_2 
+var tmp_bl=null;
+for(var i=0;i<mass_section.length;++i){
+	if(mass_section[i].Id==id){
+		tmp_bl=mass_section.splice(i, 1);
+//alert(tmp_bl);
+break;
+}
+}
+for(var num=0;document.getElementById('save_delete_section_'+num)!=null;++num);
+	var tmp_str="<input id='save_delete_section_"+num+"' type='hidden' value='"+id+"'>";;
+
+div_save.innerHTML+=tmp_str;
+div.remove();
+div_in.remove();
+
+}
+function delete_article_f(id){
+	var div_save=document.getElementById("div_for_change_info_id");
+	var div=document.getElementById('div_one_article_name_'+id);
+	var tmp_bl=null;
+	for(var i=0;i<mass_article.length;++i){
+		if(mass_article[i].Id==id){
+			tmp_bl=mass_article.splice(i, 1);
+//alert(tmp_bl);
+break;
+}
+}
+for(var num=0;document.getElementById('save_delete_article_'+num)!=null;++num);
+	var tmp_str="<input id='save_delete_article_"+num+"' type='hidden' value='"+id+"'>";;
+
+div_save.innerHTML+=tmp_str;
+div.remove();
+
+}
 // function click_up_on_centre_settings(){
 
 // }
@@ -897,6 +1051,7 @@ function move_search_div(marginleft){
 	search_div.style.marginLeft = marginleft+'px';
 }
 </script>
+<script src="jquery.unobtrusive-ajax.min.js"></script>
 </head><body>
 	<div class="div_for_change_info" id="div_for_change_info_id">
 		

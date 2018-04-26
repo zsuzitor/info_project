@@ -55,7 +55,7 @@ Head ="";
         {
             InitializeComponent();
             this.FormClosing += Form1_Closing;
-            read_db();
+           // read_db();
             start_brows();
             //Thread.Sleep(5000);
             //string fsd = webBrowser1.Document.GetElementById("test_id").GetAttribute("value");
@@ -127,7 +127,10 @@ Head ="";
 
             res_html += "</body></html>";
 
-            webBrowser1.DocumentText = res_html;
+
+            string test_res = "";
+            test_res=File.ReadAllText(@"in.html");
+            webBrowser1.DocumentText = test_res;
             return;
         }
 
@@ -135,12 +138,12 @@ Head ="";
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             string asd = webBrowser1.DocumentText;
-            string fsd = webBrowser1.Document.GetElementById("test_id").GetAttribute("value");
+            //string fsd = webBrowser1.Document.GetElementById("test_id").GetAttribute("value");
         }
 
         private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string fsd = webBrowser1.Document.GetElementById("test_id").GetAttribute("value");
+           // string fsd = webBrowser1.Document.GetElementById("test_id").GetAttribute("value");
         }
         }
 }
