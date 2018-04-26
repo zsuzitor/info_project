@@ -76,7 +76,7 @@
 		overflow: hidden;
 		transition: 1s;
 		position: absolute;
-		overflow-x: scroll;
+		overflow-x: auto;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 		background-color:  rgba(255, 255, 255,0.5);
 	}
@@ -372,6 +372,25 @@ div.div_search{
 		border-bottom: 1px solid black;
 	}
 
+
+	div.before_for_sect_name{/*_close*/
+		content: '';
+		width: 0px;
+		height: 0px;
+		margin-top: 5px;
+		border-left:30px solid black;
+		border-bottom:15px solid transparent;
+		border-top:15px solid transparent;
+	}
+/* div.before_for_sect_name_open{
+	content: '';
+		width: 0px;
+		height: 0px;
+		margin-top: 5px;
+		border-top:30px solid black;
+		border-bottom:15px solid transparent;
+		border-left:15px solid transparent;
+		} */
 /* div.div_one_section_inside_inside{
 	overflow: hidden;
 	transition: 1s;
@@ -394,44 +413,56 @@ div.div_search{
 
 когда смещаю влево блок с кнопками смещать правее блок menu или вообще его на постоянку переместить правее и смотреть что бы его не перекрывала кнопка поиска
 
-//колонку слева высоту ей задавать js
-//линия в блоке сверху сделать что бы ей можно было менять рамеры divов
-//слева человеческий список сделать
+
 реальзация поиска
-кнопка круглая будет именно кнопкой для поиска
-//добавить тени и css
-//TODO прикрутить это что бы при клики правой и зажатой левой возвращалось назад и корды хранить в объекте 
-//+проверить добавить скролл по х для блоков
-хранить последнеий нажатый блок
-//+проверить document.onmousemove   проверки на выход за границы
+
 ширину divов левого и правого задавать из js а не css
-//при перемещении блока настроек переносить блок с поиском
+
 добавить резервное копирование и спрашивать о том нужно ли сохранение(мб просто кнопку в меню сверху)
-при удалении внешнего блока удалять все в нем но не его
+
 передавать в шарп в json строке всю инфу которая нужна
 после каждого действия (сохранния удаления сохранять это действие в json и в html)
 
 
-//клик который открывает меню слева должен скрывать меню справа если меню слева уже открыто
+
 блок настроек сейчас немного не симметрично расположен 1-2 пикселя
 кнопка для закрытия всех вкладок
 hidden_search_block мб не нужен и тот что рядом тоже
-//старт при маленьком экране блок настроек налезает на блок с поиском
+
 возможность редактирования выделенного объекта
 на стороне сервера или js если сохраняется код html то надо "<>" заменять на "&lt; и &gt;"   //При этом тег <p> будет выглядеть как &lt;p&gt;
-для прозрачных элементов background
+
 при наведении на кнопки делать их "выдавливание " тенью
-//вынести в функцию перемещение центра настроек и цента блоков
-И добавить трнугольники открывающиеся и закрывающиеся на блоки Как бы разворот
-При клике выделчть визуально и сохранять id блока
-при клике на пустую секцию(id4) открывается пустая подсекция которая тоже отображается пиклесей на 5
+
 проверить что бы везде были ;;;;
 подумать над внутренними тенями особенно на кнопки и сделать кнопки как то красивее и "активнее"
 после того как распарсил по массивам можно удалять <div class="div_for_base_info" id="div_for_base_info_id">
+
+кнопка редактирования
+при удалении запретить удалять внешний блок!!!!!!!!!
+
+
++++++++
+//слева в строке кнопку для подъема наверх
 //add_section_form починить
-
-
-
+//вынести в функцию перемещение центра настроек и цента блоков
+//для прозрачных элементов background
+//При клике выделчть визуально и сохранять id блока
+//при клике на пустую секцию(id4) открывается пустая подсекция которая тоже отображается пиклесей на 5
+//старт при маленьком экране блок настроек налезает на блок с поиском
+//клик который открывает меню слева должен скрывать меню справа если меню слева уже открыто
+//при удалении внешнего блока удалять все в нем но не его
+//при перемещении блока настроек переносить блок с поиском
+//кнопка круглая будет именно кнопкой для поиска
+//добавить тени и css
+//TODO прикрутить это что бы при клики правой и зажатой левой возвращалось назад и корды хранить в объекте 
+//+проверить добавить скролл по х для блоков
+//хранить последнеий нажатый блок
+//+проверить document.onmousemove   проверки на выход за границы
+//И добавить треугольники открывающиеся и закрывающиеся на блоки Как бы разворот
+//колонку слева высоту ей задавать js
+//линия в блоке сверху сделать что бы ей можно было менять рамеры divов
+//слева человеческий список сделать
 // вроде ++
 функция для получения записи из массива по id написать и заменить 
 for(var i=0;i<mass_section.length;++i)
@@ -440,8 +471,11 @@ for(var i=0;i<mass_section.length;++i)
 
 
 //
-+++++++
-слева в строке кнопку для подъема наверх
+
+
+
+
+
 
 */
 
@@ -585,7 +619,7 @@ function page_first_start(){
 			mass_section=JSON.parse(document.getElementById("string_base_info_sections").value);
 			mass_article=JSON.parse(document.getElementById("string_base_info_articles").value);
 			var str_res_for_left_ul=load_one_section(1);
-			left_div.innerHTML="<div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'>"+'ALL'+"</div>"+str_res_for_left_ul;
+			left_div.innerHTML="<div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'><div id='before_for_sect_name_1' class='before_for_sect_name div_inline_block'></div><div class='div_inline_block'>"+'ALL'+"</div></div>"+str_res_for_left_ul;
 
 		}
 
@@ -607,7 +641,7 @@ function page_first_start(){
 
 
 	for(var i=0;i<mass_with_id.length;++i){
-		res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+mass_with_id[i]+"'>"+ find_in_mass(mass_with_id[i],1).Head+"</div>";
+		res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+mass_with_id[i]+"'><div id='before_for_sect_name_"+mass_with_id[i]+"' class='before_for_sect_name div_inline_block'></div><div class='div_inline_block'>"+ find_in_mass(mass_with_id[i],1).Head+"</div></div>";
 		res+=load_one_section(mass_with_id[i]);
 	}
 
@@ -647,6 +681,7 @@ function find_in_mass(id,type_mass){//1--секция 2--артикл
 				if(mass_section[i].Id==id)
 					return mass_section[i];
 			}
+			return null;
 		}
 
 
@@ -670,7 +705,12 @@ function find_in_mass(id,type_mass){//1--секция 2--артикл
 			var num_id=a.id.split('_')[4];
 			var div=document.getElementById("div_one_section_inside_"+num_id);
 			//var div_2=document.getElementById("div_one_section_inside_inside_"+num_id);
+			var before_d=document.getElementById("before_for_sect_name_"+num_id);
 			if(div.style.display==''||div.style.display=='inline-block'){
+				
+				before_d.style.borderLeft='30px solid black';
+				before_d.style.borderBottom='15px solid transparent';
+				before_d.style.borderTop='15px solid transparent';
 
 				div.style.display='none';
 				//div_2.style.height='0';
@@ -678,7 +718,18 @@ function find_in_mass(id,type_mass){//1--секция 2--артикл
 			
 			else{
 				//div_2.style.height='300px';
-				div.style.display='inline-block';
+
+				var div_in_sec=document.getElementById("div_inside_sections_"+num_id);
+				var div_in_art=document.getElementById("div_inside_articles_"+num_id);
+
+
+				before_d.style.borderTop='30px solid black';
+				before_d.style.borderRight='15px solid transparent';
+				before_d.style.borderLeft='15px solid transparent';
+
+
+				if(div_in_sec.innerHTML!=''||div_in_art.innerHTML!='')
+					div.style.display='inline-block';
 			}
 			
 		}
@@ -883,7 +934,8 @@ var tmp="";
 
 
 
-tmp+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+obj.Id+"'>"+ find_in_mass(obj.Id,1).Head+"</div>";
+
+tmp+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+obj.Id+"'><div id='before_for_sect_name_"+obj.Id+"' class='before_for_sect_name div_inline_block'></div><div class='div_inline_block'>"+ find_in_mass(obj.Id,1).Head+"</div></div>";
 tmp+=load_one_section(obj.Id);
 inside_sect.innerHTML+=tmp;
 
@@ -979,38 +1031,54 @@ function dell_select(){
 	if(last_click_name.indexOf("div_one_section_name")>=0){
 		for(var num=0;document.getElementById('save_delete_section_'+num)!=null;++num);
 			var tmp_bl=null;
-		var mass_sect_del=find_child_section(id).split('_');
-		for(var i=0;i<mass_sect_del.length;++i){
-			if(mass_sect_del[i]!=''){
-				for(var i2=0;i2<mass_article.length;++i2)
-					if(mass_article[i2].Section_id==mass_sect_del[i])
-						delete_article_f(mass_article[i2].Id);
+		// var mass_sect_del=find_child_section(id).split('_');
+		// for(var i=0;i<mass_sect_del.length;++i){
+		// 	if(mass_sect_del[i]!=''){
+				
 
 
-					delete_section_f(mass_sect_del[i]);
+		// 		delete_section_f(mass_sect_del[i]);
 
-				}
-			}
+		// 	}
+		// }
 
-
+		// if(id!=1)
 			delete_section_f(id);
-		}
-		else if(last_click_name.indexOf("div_one_article_name")>=0){
-
-			delete_article_f(id);
-		}
-
-
-
 	}
-	function delete_section_f(id){
-		var div_save=document.getElementById("div_for_change_info_id");
-		var div=document.getElementById("div_one_section_name_"+id);
-		var div_in=document.getElementById("div_one_section_inside_"+id);
-		var div_in=document.getElementById("div_one_section_inside_"+id);
+	else if(last_click_name.indexOf("div_one_article_name")>=0){
+
+		delete_article_f(id);
+	}
+
+
+
+}
+function delete_section_f(id){
+	var div_save=document.getElementById("div_for_change_info_id");
+	var div=document.getElementById("div_one_section_name_"+id);
+	var div_in=document.getElementById("div_one_section_inside_"+id);
+	//var div_in=document.getElementById("div_one_section_inside_"+id);
 //div_inside_articles_2 
-var tmp_bl=null;
+if(find_in_mass(id,1)==null)
+	return;
+for(var i=0;i<mass_article.length;++i)
+	if(mass_article[i].Section_id==id)
+		delete_article_f(mass_article[i--].Id);
+
+	var tmp_bl=null;
+	for(var i=0;i<mass_section.length;++i){
+		if(mass_section[i].Parrent_id==id){
+			delete_section_f(mass_section[i--].Id);
+//alert(tmp_bl);
+
+}
+
+
+}
+if(id==1)
+return;
 for(var i=0;i<mass_section.length;++i){
+	
 	if(mass_section[i].Id==id){
 		tmp_bl=mass_section.splice(i, 1);
 //alert(tmp_bl);
@@ -1064,6 +1132,31 @@ function move_search_div(marginleft){
 		{
 			"Id": 1,
 			"Parrent_id": 0,
+			"Head": "id1"
+		},
+		{
+			"Id": 8,
+			"Parrent_id": 1,
+			"Head": "id1"
+		},
+		{
+			"Id": 9,
+			"Parrent_id": 1,
+			"Head": "id1"
+		},
+		{
+			"Id": 10,
+			"Parrent_id": 1,
+			"Head": "id1"
+		},
+		{
+			"Id": 11,
+			"Parrent_id": 1,
+			"Head": "id1"
+		},
+		{
+			"Id": 12,
+			"Parrent_id": 1,
 			"Head": "id1"
 		},
 		{
