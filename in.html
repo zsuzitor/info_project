@@ -139,7 +139,7 @@ div.div_search{
 	width: 300px;
 	} */
 	div.div_settings_block{
-		width: 100px;
+		width: 98px;
 		top: 0;
 		margin: auto;
 		border: 1px solid black;
@@ -319,18 +319,20 @@ div.div_search{
 	}
 
 
-	span.lupa{height:40px; width:40px; display:block; position:relative;
+	span.span_top_menu_lupa{height:40px; width:40px; display:block; position:relative;
 		left: 5px;
 		top: 5px;
 	}
 	
-	.lupa:before, .lupa:after{content:''; height:20px; display:block; position:absolute; top:0; left:0; }
-	
-	.lupa:before{width:20px; border:3px #333 solid; border-radius:100%;-webkit-border-radius:100%;-moz-border-radius:100%;}
-	
-	.lupa:after{width:7px; background:#333; transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg); top:17px; left:24px;}
 
-	span.home {
+	span.span_top_menu_lupa:before, span.span_top_menu_lupa:after{content:''; height:20px; display:block; position:absolute; top:0; left:0; }
+	
+	span.span_top_menu_lupa:before{width:20px; border:3px #333 solid; border-radius:100%;-webkit-border-radius:100%;-moz-border-radius:100%;}
+	
+	span.span_top_menu_lupa:after{width:7px; background:#333; transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg); top:17px; left:24px;}
+
+
+	span.span_top_menu_home {
 		height: 0px;
 		width: 0px;
 		border-width: 16px;
@@ -342,7 +344,7 @@ div.div_search{
 
 	}
 
-	span.home:after {
+	span.span_top_menu_home:after {
 		content: '';
 		width: 5px;
 		height: 16px;
@@ -354,7 +356,7 @@ div.div_search{
 		border-right: 8px solid #333;
 	}
 
-	span.home:before {
+	span.span_top_menu_home:before {
 		content: '';
 		width: 9px;
 		height: 6px;
@@ -396,7 +398,16 @@ div.div_search{
 	transition: 1s;
 	} */
 
+	span.span_top_menu_edit{
+		/* content: '\2626'; */
+		width: 100%;
+		height: 100%;
+		font-size: 35pt;
+		position: absolute;
+		top: -9px;
+		left: 0;
 
+	}
 
 </style>
 <script>
@@ -439,10 +450,13 @@ hidden_search_block мб не нужен и тот что рядом тоже
 после того как распарсил по массивам можно удалять <div class="div_for_base_info" id="div_for_base_info_id">
 
 кнопка редактирования
-при удалении запретить удалять внешний блок!!!!!!!!!
+
+написать функцию для отрисовки блока с названием секции
+edit_select_section_form и рядом доделать
 
 
 +++++++
+//при удалении запретить удалять внешний блок!!!!!!!!!
 //слева в строке кнопку для подъема наверх
 //add_section_form починить
 //вынести в функцию перемещение центра настроек и цента блоков
@@ -678,8 +692,8 @@ function find_in_mass(id,type_mass){//1--секция 2--артикл
 		}
 		else if(type_mass==2){
 			for(var i=0;i<mass_article.length;++i)
-				if(mass_section[i].Id==id)
-					return mass_section[i];
+				if(mass_article[i].Id==id)
+					return mass_article[i];
 			}
 			return null;
 		}
@@ -941,9 +955,6 @@ inside_sect.innerHTML+=tmp;
 
 
 
-
-
-
 }
 function find_maximum_id(mass){
 	var max=null;
@@ -977,8 +988,8 @@ function find_maximum_id(mass){
 			var sect_body_input=document.getElementById("input_for_article_body");
 			var div_save=document.getElementById("div_for_change_info_id");
 			var obj={};
-			obj.Id=+find_maximum_id(mass_section) +1;
-			obj.Section_id=last_click_name.split('_')[4];
+			obj.Id=+find_maximum_id(mass_article) +1;
+			obj.Section_id=+last_click_name.split('_')[4];
 			obj.Head=sect_name_input.value;
 			obj.Body=sect_body_input.value;
 
@@ -1004,52 +1015,41 @@ inside_sect.innerHTML+=tmp;
 
 function dell_select(){
 
+//функция не нужна
+	// function find_child_section(id){
+	// 	var res='';
 
-	function find_child_section(id){
-		var res='';
-
-		for(var i=0;i<mass_section.length;++i){
-			if(mass_section[i].Parrent_id==id){
-				res+=mass_section[i].Id;
-				res+="_"+find_child_section(mass_section[i].Id);
-			}
-		}
+	// 	for(var i=0;i<mass_section.length;++i){
+	// 		if(mass_section[i].Parrent_id==id){
+	// 			res+=mass_section[i].Id;
+	// 			res+="_"+find_child_section(mass_section[i].Id);
+	// 		}
+	// 	}
 
 
-		return res;
-	}
+	// 	return res;
+	// }
 
 
 
 	var id=last_click_name.split('_')[4];
 	if(last_click_name==null){
-		alert("выберите что то для удаления");
+		alert("выберите что-то для удаления");
 		return;
 	}
 
 
 	if(last_click_name.indexOf("div_one_section_name")>=0){
-		for(var num=0;document.getElementById('save_delete_section_'+num)!=null;++num);
-			var tmp_bl=null;
-		// var mass_sect_del=find_child_section(id).split('_');
-		// for(var i=0;i<mass_sect_del.length;++i){
-		// 	if(mass_sect_del[i]!=''){
-				
+		//for(var num=0;document.getElementById('save_delete_section_'+num)!=null;++num);
+		//	var tmp_bl=null;
 
-
-		// 		delete_section_f(mass_sect_del[i]);
-
-		// 	}
-		// }
-
-		// if(id!=1)
-			delete_section_f(id);
+		delete_section_f(id);
 	}
 	else if(last_click_name.indexOf("div_one_article_name")>=0){
 
 		delete_article_f(id);
 	}
-
+last_click_name=null;
 
 
 }
@@ -1076,7 +1076,7 @@ for(var i=0;i<mass_article.length;++i)
 
 }
 if(id==1)
-return;
+	return;
 for(var i=0;i<mass_section.length;++i){
 	
 	if(mass_section[i].Id==id){
@@ -1117,6 +1117,51 @@ div.remove();
 function move_search_div(marginleft){
 	var search_div=document.getElementById("div_search_id");
 	search_div.style.marginLeft = marginleft+'px';
+}
+
+
+function edit_select(){
+var id=last_click_name.split('_')[4];
+
+	if(last_click_name==null){
+		alert("выберите что то для редактирования");
+		return;
+	}
+var right_div=document.getElementById("main_block_right_id");
+var res='<div>';
+
+
+
+	if(last_click_name.indexOf("div_one_section_name")>=0){
+var block=find_in_mass(id,1);		
+		res+='<input type="text" id="input_for_section_name" value="'+block.Head+'">';
+		res+='<button onclick="edit_select_section_form('+id+')">Сохранить название</button>';
+		res+='</div>';
+
+		
+	}
+	else if(last_click_name.indexOf("div_one_article_name")>=0){
+var block=find_in_mass(id,2);
+//mass_article=null;
+res+='<input type="text" id="input_for_article_head" value="'+block.Head+'">';
+res+='<input type="text" id="input_for_article_body" value="'+block.Body+'">';
+		res+='<button onclick="edit_select_article_form('+id+')">Сохранить название</button>';
+		res+='</div>';
+
+
+	}
+	right_div.innerHTML=res;
+}
+//TODO обновлять как в оперативке так и view
+function edit_select_section_form(id){
+	var block=find_in_mass(id,2);
+	var section=document.getElementById("div_one_section_name_"+id);
+block.Head=document.getElementById("input_for_section_name");
+//TODO
+
+}
+function edit_select_article_form(id){
+	
 }
 </script>
 <script src="jquery.unobtrusive-ajax.min.js"></script>
@@ -1227,25 +1272,39 @@ function move_search_div(marginleft){
 				<div class="div_inline_block top_menu_button top_menu_add_section" title="добавить секцию" onclick='add_section()'></div>
 				<div class="div_inline_block top_menu_button top_menu_add_article"  title="добавить статью" onclick='add_article()'></div>
 				<div class="div_inline_block top_menu_button top_menu_dell_select"   title="удалить выбранное" onclick='dell_select()'></div>
-				<div class="div_inline_block top_menu_button top_menu_home_button" onclick=''><span class="home"></span></div>
-			</div>
-			<div class="div_inline_block div_search" id="div_search_id" onmouseout='hidden_search_block()' onmouseover='show_search_block()'>
-				<div class="div_search_img div_inline_block" id='div_search_img_id' onclick="start_search()"><span class="lupa"></span></div>
-				<div class="div_inline_block div_search_input_block"> <input type="text"></div>
-			</div>
-			<div class="div_inline_block div_settings_block" id="div_settings_block_id">
-				<div>
-					<div class="div_inline_block"><div class="div_settings_left_b" onclick="show_left_menu()"></div></div>
-					<div  class="div_inline_block"><div class="div_settings_centre_b" onmouseup="click_on_centre_settings(false)" onmousedown="click_on_centre_settings(true)"></div></div>
-					<div class="div_inline_block"><div class="div_settings_right_b" onclick="hidden_left_menu()"></div></div>
-				</div>
-				<div id="div_settings_bottom_b_ex"><div class="div_settings_bottom_b" onclick="show_top_menu()"></div></div>
-			</div>
-		</div>
-		<div class="div_left_column" id="div_left_column_id"><div class="scroll_top_button" id="scroll_top_button_id" onclick="up()"></div></div>
-		<div class="div_inline_block div_for_block" id="div_for_block_id"><div class="div_inline_block main_block_left" id="main_block_left_id"></div>
-		<div class="div_inline_block  main_block_right" id="main_block_right_id"></div></div>
-	</div>
+				<div class="div_inline_block top_menu_button top_menu_home_button" title="иконка дома" onclick=''>
+					<span class="span_top_menu_home"></span></div>
+					<div class="div_inline_block top_menu_button top_menu_edit_button" onclick='edit_select()' title="редактировать выделенное" onclick=''>
+						<span class="span_top_menu_edit">&#10000;</span></div>
+					</div>
+					<div class="div_inline_block div_search" id="div_search_id" onmouseout='hidden_search_block()' onmouseover='show_search_block()'>
+						<div class="div_search_img div_inline_block" id='div_search_img_id' onclick="start_search()">
+							<span class="span_top_menu_lupa"></span></div>
+							<div class="div_inline_block div_search_input_block"> <input type="text"></div>
+						</div>
+						<div class="div_inline_block div_settings_block" id="div_settings_block_id">
+							<div>
+								<div class="div_inline_block"><div class="div_settings_left_b" onclick="show_left_menu()"></div></div>
+								<div  class="div_inline_block">
+									<div class="div_settings_centre_b" onmouseup="click_on_centre_settings(false)" onmousedown="click_on_centre_settings(true)">
+
+									</div></div>
+									<div class="div_inline_block"><div class="div_settings_right_b" onclick="hidden_left_menu()">
+
+									</div></div>
+								</div>
+								<div id="div_settings_bottom_b_ex"><div class="div_settings_bottom_b" onclick="show_top_menu()">
+
+								</div></div>
+							</div>
+						</div>
+						<div class="div_left_column" id="div_left_column_id"><div class="scroll_top_button" id="scroll_top_button_id" onclick="up()">
+
+						</div></div>
+						<div class="div_inline_block div_for_block" id="div_for_block_id">
+							<div class="div_inline_block main_block_left" id="main_block_left_id"></div>
+							<div class="div_inline_block  main_block_right" id="main_block_right_id"></div></div>
+						</div>
 
 
 
@@ -1254,5 +1313,5 @@ function move_search_div(marginleft){
 
 
 
-</body></html>
+					</body></html>
 
