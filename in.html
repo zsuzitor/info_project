@@ -182,9 +182,9 @@ animation:rotate_glass_transform 1s linear infinite;
 	div.div_for_top_menu{
 		position: absolute;
 		width: 100%;
-		height: 50px;
-		top: -60px;
-		left: 100px;
+		/* height: 50px; */
+		top: 30px;
+		left: -70px;
 		transition: 1s;
 	}
 	div.div_settings_left_b{
@@ -330,6 +330,9 @@ animation:up_down_button_top_left_div 1s linear infinite;
 		white-space:nowrap;
 
 	}
+	div.div_one_section_name:hover{
+box-shadow:inset 0 0 15px rgba(0,0,0,1);
+	}
 
 	div.div_inside_articles{
 		background-color: #98FB98;
@@ -411,7 +414,9 @@ div.top_menu_home_button:hover span.span_top_menu_home{
 	div.div_one_article_name{
 		border-bottom: 1px solid black;
 	}
-
+div.div_one_article_name:hover{
+		box-shadow:inset 0 0 15px rgba(0,0,0,1);
+	}
 
 	div.before_for_sect_name{/*_close*/
 		content: '';
@@ -503,7 +508,7 @@ hidden_search_block мб не нужен и тот что рядом тоже
 проверить что бы везде были ;;;;
 подумать над внутренними тенями особенно на кнопки и сделать кнопки как то красивее и "активнее"
 
-
+хранить путь к выделенной вкладке и выделять весь путь
 хранить открытые вкладки что бы можно было восстановить все как было
 добавить защиту на клики(пока определенная функция не выполнится не разрешать менять last_click_name)
 
@@ -671,7 +676,7 @@ function page_first_start(){
 			right_div.style.left=left_div.offsetWidth+5+'px';
 
 			var left_top_button=document.getElementById("scroll_top_button_id");
-			left_top_button.style.marginTop = client_heigth/2+'px';
+			left_top_button.style.marginTop = document.getElementById("div_for_top_menu_id").getBoundingClientRect().bottom+'px';
 
 
 			if(setting_div.getBoundingClientRect().left<310){
@@ -841,9 +846,9 @@ function find_in_mass(id,type_mass){//1--секция 2--артикл
 
 			function show_top_menu(){
 				var top_menu=document.getElementById("div_for_top_menu_id");
-				var top_setings=document.getElementById("div_settings_block_id");
-				top_menu.style.top="0";
-				top_setings.style.top="70px";
+				//var top_setings=document.getElementById("div_settings_block_id");
+				top_menu.style.left ="0";
+				//top_setings.style.top="70px";
 				var ch=document.getElementById("div_settings_bottom_b_ex");
 				ch.innerHTML="<div class='div_settings_top_b' onclick='hidden_top_menu()'></div>";
 			}
@@ -851,9 +856,9 @@ function find_in_mass(id,type_mass){//1--секция 2--артикл
 
 			function hidden_top_menu(){
 				var top_menu=document.getElementById("div_for_top_menu_id");
-				var top_setings=document.getElementById("div_settings_block_id");
-				top_menu.style.top="-70px";
-				top_setings.style.top="0";
+				//var top_setings=document.getElementById("div_settings_block_id");
+				top_menu.style.left="-70px";
+				//top_setings.style.top="0";
 				var ch=document.getElementById("div_settings_bottom_b_ex");
 				ch.innerHTML="<div class='div_settings_bottom_b' onclick='show_top_menu()'></div>";
 
@@ -1393,17 +1398,7 @@ function save(){
 
 	<div class="main_div">
 		<div class="main_top_div">
-			<div class="div_for_top_menu" id="div_for_top_menu_id">
-				<div class="div_inline_block top_menu_button top_menu_add_section" title="добавить секцию" onclick='add_section()'></div>
-				<div class="div_inline_block top_menu_button top_menu_add_article"  title="добавить статью" onclick='add_article()'></div>
-				<div class="div_inline_block top_menu_button top_menu_dell_select"   title="удалить выбранное" onclick='dell_select()'></div>
-				<div class="div_inline_block top_menu_button top_menu_home_button" title="восстановить меню" onclick=''>
-					<span class="span_top_menu_home"></span></div>
-					<div class="div_inline_block top_menu_button top_menu_edit_button" onclick='edit_select()' title="редактировать выделенное" onclick=''>
-						<span class="span_top_menu_edit">&#10000;</span></div>
-						<div class="div_inline_block top_menu_button top_menu_save_button" onclick='' title="Сохранить все изменения" onclick=''>
-						<span class="span_top_menu_save">&#9883;</span></div>
-					</div>
+			
 					<div class="div_inline_block div_search" id="div_search_id" onmouseout='hidden_search_block()' onmouseover='show_search_block()'>
 						<div class="div_search_img div_inline_block" id='div_search_img_id' onclick="start_search()">
 							<span class="span_top_menu_lupa"></span></div>
@@ -1425,7 +1420,21 @@ function save(){
 								</div></div>
 							</div>
 						</div>
-						<div class="div_left_column" id="div_left_column_id"><div class="scroll_top_button" id="scroll_top_button_id" onclick="up()">
+						<div class="div_left_column" id="div_left_column_id">
+<div class="div_for_top_menu" id="div_for_top_menu_id">
+				<div class="top_menu_button top_menu_add_section" title="добавить секцию" onclick='add_section()'></div>
+				<div class="top_menu_button top_menu_add_article"  title="добавить статью" onclick='add_article()'></div>
+				<div class="top_menu_button top_menu_dell_select"   title="удалить выбранное" onclick='dell_select()'></div>
+				<div class="top_menu_button top_menu_home_button" title="восстановить меню" onclick=''>
+					<span class="span_top_menu_home"></span></div>
+					<div class="top_menu_button top_menu_edit_button" onclick='edit_select()' title="редактировать выделенное" onclick=''>
+						<span class="span_top_menu_edit">&#10000;</span></div>
+						<div class="top_menu_button top_menu_save_button" onclick='' title="Сохранить все изменения" onclick=''>
+						<span class="span_top_menu_save">&#9883;</span></div>
+					</div>
+
+
+							<div class="scroll_top_button" id="scroll_top_button_id" onclick="up()">
 
 						</div></div>
 						<div class="div_inline_block div_for_block" id="div_for_block_id">
