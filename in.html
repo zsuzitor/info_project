@@ -410,6 +410,10 @@ div.div_search{
 	}
 
 </style>
+<script src="jquery.unobtrusive-ajax.min.js"></script>
+
+
+
 <script>
 // box-shadow: 0 0 10px rgba(0,0,0,0.5);
 //TODO
@@ -451,9 +455,9 @@ hidden_search_block мб не нужен и тот что рядом тоже
 
 кнопка редактирования
 
-написать функцию для отрисовки блока с названием секции
+//написать функцию для отрисовки блока с названием секции
 edit_select_section_form и рядом доделать
-
+добавить защиту на клики(пока определенная функция не выполнится не разрешать менять last_click_name)
 
 +++++++
 //при удалении запретить удалять внешний блок!!!!!!!!!
@@ -633,12 +637,23 @@ function page_first_start(){
 			mass_section=JSON.parse(document.getElementById("string_base_info_sections").value);
 			mass_article=JSON.parse(document.getElementById("string_base_info_articles").value);
 			var str_res_for_left_ul=load_one_section(1);
-			left_div.innerHTML="<div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'><div id='before_for_sect_name_1' class='before_for_sect_name div_inline_block'></div><div class='div_inline_block'>"+'ALL'+"</div></div>"+str_res_for_left_ul;
+
+			left_div.innerHTML=str_add_name_section(1,true)+str_res_for_left_ul;
+			// left_div.innerHTML="<div id='div_one_section_name_1' class='div_one_section_name' onclick='click_name_section(this)'><div id='before_for_sect_name_1' class='before_for_sect_name div_inline_block'></div><div class='div_inline_block'>"+'ALL'+"</div></div>"+str_res_for_left_ul;
 
 		}
 
 
+		function str_add_name_section(id,all){
+			var res="";
+			if(all!=null&&all==true)
+				res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+id+"'>";
+			res+="<div id='before_for_sect_name_"+id+"' class='before_for_sect_name div_inline_block'></div><div class='div_inline_block' id='div_one_section_name_text_"+id+"'>"+ find_in_mass(id,1).Head+"</div>";
+			if(all!=null&&all==true)
+				res+="</div>";
 
+			return res;
+		}
 		function load_one_section(id){
 	// style='height:0;' для div_one_section_inside_inside_ если пытаться сделлать плавное открывание и раскомментить css div.div_one_section_inside_inside
 	var res="<div style='display:none;' class='div_one_section_inside_cl' id='div_one_section_inside_"+id+"'><div class='div_one_section_inside_inside' id='div_one_section_inside_inside_"+id+"'>\
@@ -655,7 +670,8 @@ function page_first_start(){
 
 
 	for(var i=0;i<mass_with_id.length;++i){
-		res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+mass_with_id[i]+"'><div id='before_for_sect_name_"+mass_with_id[i]+"' class='before_for_sect_name div_inline_block'></div><div class='div_inline_block'>"+ find_in_mass(mass_with_id[i],1).Head+"</div></div>";
+		// res+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+mass_with_id[i]+"'><div id='before_for_sect_name_"+mass_with_id[i]+"' class='before_for_sect_name div_inline_block'></div><div class='div_inline_block'>"+ find_in_mass(mass_with_id[i],1).Head+"</div></div>";
+		res+=str_add_name_section(mass_with_id[i],true);
 		res+=load_one_section(mass_with_id[i]);
 	}
 
@@ -941,15 +957,15 @@ var res="";
 for(var num=0;document.getElementById('save_adds_section_id_'+num)!=null;++num);
 
 	res+="<input id='save_adds_section_id_"+num+"' type='hidden' value='"+obj.Id+"'>";
-res+="<input id='save_adds_section_parrent_id_"+num+"' type='hidden' value='"+obj.Parrent_id+"'>";
-res+="<input id='save_adds_section_head_"+num+"' type='hidden' value='"+obj.Head+"'>";
+res+="<input id='save_adds_section_parrent_id_"+obj.Id+"' type='hidden' value='"+obj.Parrent_id+"'>";
+res+="<input id='save_adds_section_head_"+obj.Id+"' type='hidden' value='"+obj.Head+"'>";
 div_save.innerHTML+=res;
 var tmp="";
 
 
 
-
-tmp+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+obj.Id+"'><div id='before_for_sect_name_"+obj.Id+"' class='before_for_sect_name div_inline_block'></div><div class='div_inline_block'>"+ find_in_mass(obj.Id,1).Head+"</div></div>";
+tmp+=str_add_name_section(obj.Id,true);
+// tmp+="<div  class='div_one_section_name' onclick='click_name_section(this)' id='div_one_section_name_"+obj.Id+"'><div id='before_for_sect_name_"+obj.Id+"' class='before_for_sect_name div_inline_block'></div><div class='div_inline_block'>"+ find_in_mass(obj.Id,1).Head+"</div></div>";
 tmp+=load_one_section(obj.Id);
 inside_sect.innerHTML+=tmp;
 
@@ -1001,9 +1017,9 @@ var res="";
 for(var num=0;document.getElementById('save_adds_article_'+num)!=null;++num);
 
 	res+="<input id='save_adds_article_id_"+num+"' type='hidden' value='"+obj.Id+"'>";
-res+="<input id='save_adds_article_section_id_"+num+"' type='hidden' value='"+obj.Section_id+"'>";
-res+="<input id='save_adds_article_head_"+num+"' type='hidden' value='"+obj.Head+"'>";
-res+="<input id='save_adds_article_body_"+num+"' type='hidden' value='"+obj.Body+"'>";
+res+="<input id='save_adds_article_section_id_"+obj.Id+"' type='hidden' value='"+obj.Section_id+"'>";
+res+="<input id='save_adds_article_head_"+obj.Id+"' type='hidden' value='"+obj.Head+"'>";
+res+="<input id='save_adds_article_body_"+obj.Id+"' type='hidden' value='"+obj.Body+"'>";
 div_save.innerHTML+=res;
 var tmp="";
 
@@ -1049,7 +1065,7 @@ function dell_select(){
 
 		delete_article_f(id);
 	}
-last_click_name=null;
+	last_click_name=null;
 
 
 }
@@ -1121,19 +1137,19 @@ function move_search_div(marginleft){
 
 
 function edit_select(){
-var id=last_click_name.split('_')[4];
+	var id=last_click_name.split('_')[4];
 
 	if(last_click_name==null){
 		alert("выберите что то для редактирования");
 		return;
 	}
-var right_div=document.getElementById("main_block_right_id");
-var res='<div>';
+	var right_div=document.getElementById("main_block_right_id");
+	var res='<div>';
 
 
 
 	if(last_click_name.indexOf("div_one_section_name")>=0){
-var block=find_in_mass(id,1);		
+		var block=find_in_mass(id,1);		
 		res+='<input type="text" id="input_for_section_name" value="'+block.Head+'">';
 		res+='<button onclick="edit_select_section_form('+id+')">Сохранить название</button>';
 		res+='</div>';
@@ -1141,30 +1157,65 @@ var block=find_in_mass(id,1);
 		
 	}
 	else if(last_click_name.indexOf("div_one_article_name")>=0){
-var block=find_in_mass(id,2);
+		var block=find_in_mass(id,2);
 //mass_article=null;
 res+='<input type="text" id="input_for_article_head" value="'+block.Head+'">';
 res+='<input type="text" id="input_for_article_body" value="'+block.Body+'">';
-		res+='<button onclick="edit_select_article_form('+id+')">Сохранить название</button>';
-		res+='</div>';
+res+='<button onclick="edit_select_article_form('+id+')">Сохранить название</button>';
+res+='</div>';
 
 
-	}
-	right_div.innerHTML=res;
+}
+right_div.innerHTML=res;
 }
 //TODO обновлять как в оперативке так и view
 function edit_select_section_form(id){
-	var block=find_in_mass(id,2);
-	var section=document.getElementById("div_one_section_name_"+id);
-block.Head=document.getElementById("input_for_section_name");
+	var block=find_in_mass(id,1);
+	var section=document.getElementById("div_one_section_name_text_"+id);
+	block.Head=document.getElementById("input_for_section_name").value;
 //TODO
+section.innerHTML=block.Head;
+//section.innerHTML=str_add_name_section(id,false);
+document.getElementById("main_block_right_id").innerHTML="";
+
+var div_save=document.getElementById("div_for_change_info_id");
+
+for(var num=0;document.getElementById('save_edit_section_'+num)!=null;++num);
+	var tmp_str="<input id='save_edit_section_"+num+"' type='hidden' value='"+id+"'>";
+tmp_str+="<input id='save_edit_section_id_head_"+id+"' type='hidden' value='"+block.Head+"'>";
+div_save.innerHTML+=tmp_str;
 
 }
 function edit_select_article_form(id){
-	
+	var block=find_in_mass(id,2);
+	var name=document.getElementById("div_one_article_name_"+id);
+	block.Head=document.getElementById("input_for_article_head").value;
+	block.Body=document.getElementById("input_for_article_body").value;
+//TODO
+name.innerHTML=block.Head;
+name.click();
+for(var num=0;document.getElementById('save_edit_article_'+num)!=null;++num);
+	var tmp_str="<input id='save_edit_article_"+num+"' type='hidden' value='"+id+"'>";
+tmp_str+="<input id='save_edit_article_id_head_"+id+"' type='hidden' value='"+block.Head+"'>";
+tmp_str+="<input id='save_edit_article_id_body_"+id+"' type='hidden' value='"+block.Body+"'>";
+div_save.innerHTML+=tmp_str;
+
+}
+
+
+
+function save(){
+// save_edit_article_ по счетчику смотрю id и по id беру данные в  save_edit_article_id_head_+id   save_edit_article_id_body_+id
+// save_edit_section_ по счетчику смотрю id и по id беру данные в  save_edit_section_id_head_+id  
+//save_delete_article_ по счетчику смотрю id
+//save_delete_section_  по счетчику смотрю id
+//save_adds_article_id_ по счетчику смотрю id по id беру данные в save_adds_article_section_id_  save_adds_article_head_  save_adds_article_body_
+//save_adds_section_id_  по счетчику смотрю id по id беру данные в  save_adds_section_parrent_id_  save_adds_section_head_
+
+
 }
 </script>
-<script src="jquery.unobtrusive-ajax.min.js"></script>
+
 </head><body>
 	<div class="div_for_change_info" id="div_for_change_info_id">
 		
@@ -1177,7 +1228,7 @@ function edit_select_article_form(id){
 		{
 			"Id": 1,
 			"Parrent_id": 0,
-			"Head": "id1"
+			"Head": "ALL"
 		},
 		{
 			"Id": 8,
