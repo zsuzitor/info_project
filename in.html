@@ -466,7 +466,8 @@ div.div_one_article_name:hover{
 	}
 
 </style>
-<script src="jquery.unobtrusive-ajax.min.js"></script>
+<script src="script/jquery-3.2.1.min.js"></script>
+<script src="script/jquery.unobtrusive-ajax.min.js"></script>
 
 
 
@@ -482,7 +483,7 @@ div.div_one_article_name:hover{
 
 <!--<button onclick="console.log('sdf')">11111111111111111111111</button>-->
 
-когда смещаю влево блок с кнопками смещать правее блок menu или вообще его на постоянку переместить правее и смотреть что бы его не перекрывала кнопка поиска
+
 
 
 реальзация поиска
@@ -496,7 +497,7 @@ div.div_one_article_name:hover{
 
 
 
-блок настроек сейчас немного не симметрично расположен 1-2 пикселя
+
 кнопка для закрытия всех вкладок
 hidden_search_block мб не нужен и тот что рядом тоже
 
@@ -506,7 +507,7 @@ hidden_search_block мб не нужен и тот что рядом тоже
 при наведении на кнопки делать их "выдавливание " тенью
 
 проверить что бы везде были ;;;;
-подумать над внутренними тенями особенно на кнопки и сделать кнопки как то красивее и "активнее"
+
 
 хранить путь к выделенной вкладке и выделять весь путь
 хранить открытые вкладки что бы можно было восстановить все как было
@@ -546,7 +547,9 @@ for(var i=0;i<mass_section.length;++i)
 //после того как распарсил по массивам можно удалять <div class="div_for_base_info" id="div_for_base_info_id">
 //написать функцию для отрисовки блока с названием секции
 //edit_select_section_form и рядом доделать
-
+//подумать над внутренними тенями особенно на кнопки и сделать кнопки как то красивее и "активнее"
+//блок настроек сейчас немного не симметрично расположен 1-2 пикселя
+//когда смещаю влево блок с кнопками смещать правее блок menu или вообще его на постоянку переместить правее и смотреть что бы его не перекрывала кнопка поиска
 
 
 
@@ -1283,7 +1286,8 @@ div_save.innerHTML+=tmp_str;
 
 
 
-function save(){
+function save_server_db(){
+	//TODO проверить , вроде не все поля сохраняются(parrent_id)
 // save_edit_article_ по счетчику смотрю id и по id беру данные в  save_edit_article_id_head_+id   save_edit_article_id_body_+id
 // save_edit_section_ по счетчику смотрю id и по id беру данные в  save_edit_section_id_head_+id  
 //save_delete_article_ по счетчику смотрю id
@@ -1429,7 +1433,7 @@ function save(){
 					<span class="span_top_menu_home"></span></div>
 					<div class="top_menu_button top_menu_edit_button" onclick='edit_select()' title="редактировать выделенное" onclick=''>
 						<span class="span_top_menu_edit">&#10000;</span></div>
-						<div class="top_menu_button top_menu_save_button" onclick='' title="Сохранить все изменения" onclick=''>
+						<div class="top_menu_button top_menu_save_button" onclick='save_server_db()' title="Сохранить все изменения" onclick=''>
 						<span class="span_top_menu_save">&#9883;</span></div>
 					</div>
 
